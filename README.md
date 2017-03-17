@@ -5,11 +5,11 @@ functions in the cloud with rest api
 write your function like this
 ```javascript
 /*
+ * Function can be async if you want
  * @param query [express req.query]
  */
-(query) => {
-  // Your code here
-
+module.exports = async (query) => {
+  // your code here
   return 10
 }
 ```
