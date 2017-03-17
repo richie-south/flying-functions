@@ -21,7 +21,7 @@
     "babel-core": "^6.24.0",
     "babylon": "^6.16.1",
     "body-parser": "^1.17.1",
-    "evaljs": "^2.0.1",
+    "eval": "^0.1.2",
     "express": "^4.15.2",
     "mongoose": "^4.9.0",
     "morgan": "^1.8.1",

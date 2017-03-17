@@ -21,7 +21,7 @@ const runCode = require('../../lib/runCode')
     const currentInvocation = invocations + 1
 
     await codeStorageHandler.updateInvocations(id, currentInvocation)
-    const invocationValue = runCode(code, req.query, currentInvocation)
+    const invocationValue = await runCode(code, req.query, currentInvocation)
 
     res.json({
       result: invocationValue,

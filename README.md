@@ -35,4 +35,4 @@ Response from server executing function above
   - update
 - Use express pipes
 - Update api structure
-- async stored function invocations
+- ~~async stored function invocations~~
