@@ -36,13 +36,13 @@ const runCode = require('../../lib/runCode')
 
     // run all webhooks
     // move to mircoservice
-    await flyingFunctionHooks.map((hook) => 
+    await Promise.all(flyingFunctionHooks.map((hook) => 
       rp({
         uri: hook.url,
         method: 'POST',
         body: payload,
         json: true,
-      }))
+      })))
 
     res.json(payload)
   } catch (error) {
