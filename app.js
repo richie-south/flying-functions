@@ -42,6 +42,7 @@ app.use(function(req, res, next){
 
 // routes
 app.use('/flying', require('./routes/flyingFunctionsApi/index.js'))
+app.use('/webhook', require('./routes/invocationHookApi/index.js'))
 
 
 // 404
