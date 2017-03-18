@@ -3,6 +3,7 @@
 const router = require('express').Router()
 const createSelfUrl = require('../../lib/middleware/createSelfUrl')
 const getFlyingFunctionData = require('../../lib/middleware/getFlyingFunctionData')
+const getAllFlyingFunctionHooksWithId = require('../../lib/middleware/getAllFlyingFunctionHooksWithId')
 const run = require('./run')
 const create = require('./create')
 const view = require('./view')
@@ -20,15 +21,12 @@ router
   /**
    * Run: flying function
    */
-  .get('/:id/:name', getFlyingFunctionData, createSelfUrl, run)
+  .get('/:id/:name', getAllFlyingFunctionHooksWithId, getFlyingFunctionData, createSelfUrl, run)
+  .post('/:id/:name', getAllFlyingFunctionHooksWithId, getFlyingFunctionData, createSelfUrl, run)
   /**
    * Create: flying function
    */
   .post('/', create)
-  /**
-   * Add webhook for function invocation
-   */
-  .post('/webhook', () => {})
   // TODO: implement
   .put('/:id', () => {})
   .delete('/:id', () => {})
