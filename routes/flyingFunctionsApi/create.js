@@ -6,13 +6,14 @@ const codeStorageHandler = require('../../dal/codeStorageHandler')
 
 const create = async (req, res) => {
   const { code, name } = req.body
-  
+
   try {
     const transformedCode = codeTransformer(code)
-    const { _id } = await codeStorageHandler.create(transformedCode, name)
+    const { _id, urlId } = await codeStorageHandler.create(transformedCode, name)
 
     res.status(200).json({
-      invocationUrl: urlCreator(req.get('host'), name, _id),
+      invocationUrl: urlCreator(req.get('host'), name, urlId),
+      secretId: _id,
       name,
     })
   } catch (error) {
