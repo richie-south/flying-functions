@@ -8,8 +8,8 @@ const rp = require('request-promise')
 const runCode = require('../../lib/runCode')
 
  const run = async (req, res) => {
-  const codeParams = req.method === 'GET' ? req.params : req.body
-  const { id } = codeParams
+  const codeParams = req.method === 'GET' ? req.query : req.body
+  const { id } = req.params
   const { 
     selfUrl,
     flyingFunctionData: {
