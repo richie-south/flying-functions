@@ -4,9 +4,10 @@
   "description": "",
   "main": "app.js",
   "private": true,
-  "homepage": "http://localhost:5000/",
+  "homepage": "https://richardsoderman.se/projectflying/",
   "scripts": {
     "start": "tscomp start",
+    "build": "tscomp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
