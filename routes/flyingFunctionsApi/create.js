@@ -14,6 +14,7 @@ const create = async (req, res) => {
     res.status(200).json({
       invocationUrl: urlCreator(req.get('host'), name, urlId),
       secretId: _id,
+      urlId,
       name,
     })
   } catch (error) {
