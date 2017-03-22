@@ -4,6 +4,7 @@ const router = require('express').Router()
 const isURL = require('../../lib/middleware/isURL')
 const getFlyingFunctionData = require('../../lib/middleware/getFlyingFunctionData')
 const create = require('./create')
+const remove = require('./remove')
 
 router
   /**
@@ -11,8 +12,8 @@ router
    */
   .post('/:id', isURL, getFlyingFunctionData, create)
   /**
-   * TODO: implement
+   * Delete: removes webhook
    */
-  .delete('/:id', () => {})
+  .delete('/:id', remove)
 
 module.exports = router
