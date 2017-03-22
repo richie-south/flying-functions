@@ -80,7 +80,7 @@ Responce:
 }
 ```
 
-**GET - /flying/:id/:name**  
+**GET - /flying/:urlId/:name**  
 *invoc flying function*  
 Send flying functions params in query  
 Responce:
@@ -92,7 +92,7 @@ Responce:
 }
 ```
 
-**POST - /flying/:id/:name**  
+**POST - /flying/:urlId/:name**  
 *invoc flying function*  
 Send flying functions params in body  
 Responce:
@@ -117,6 +117,8 @@ Responce:
 ```json
 {
   "invocationUrl": "URL TO INVOC FLYING FUNCTION",
+  "urlId": "ID ONLY USED TO INVOC FLYING FUNCTION",
+  "secretId": "SECRET ID TO REMOVE/UPDATE/VIEW",
   "name": "NAME OF FLYING FUNCTION"
 }
 ```
