@@ -1,14 +1,22 @@
-# flying-functions
-functions in the cloud with rest api
+# flying-functions  
+Your functions in the cloud with rest api
 
-# TODO
+# TODO  
 
+## client
+- CRUD flying function
+- CRUD webhook
+
+
+## server  
+- Add public random id, keep mongoose id secret
 - Add webhook for function invocations - started
 - ~~Re-implement string evaluation~~
 - Add more globals 
-- Use microservices, webhooks, flyingfunctions, auth, mm - looking at mirco 
-- Add some auth and private functions
-  - delete
+  - firebase?
+- ~~Use webhooks~~
+- Add some auth and private functions - removing auth and doing secred id's inseed
+  - ~~delete~~
   - update
 - Use express pipes
 - Update api structure
@@ -26,8 +34,8 @@ write your function like this
  */
 module.exports = async (data) => {
   // your code here
-  return 10
-}
+  return 10;
+};
 ```
 
 **Resppnse**  
