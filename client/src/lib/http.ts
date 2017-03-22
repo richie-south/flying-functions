@@ -1,6 +1,6 @@
 import 'isomorphic-fetch'
 
-const sendFlyingFunctionUrl = 'http://localhost:5000/flying'
+const sendFlyingFunctionUrl = 'https://richardsoderman.se/projectflying/flying'
 
 const getBody = (code, name) => {
   return JSON.stringify({
