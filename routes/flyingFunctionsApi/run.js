@@ -2,16 +2,16 @@
 
 const codeTransformer = require('../../lib/codeTransformer')
 const codeStorageHandler = require('../../dal/codeStorageHandler')
+const invcocateFlyingWebhooks = require('../utils/invcocateFlyingWebhooks')
+const invocationHookHandler = require('../../dal/invocationHookHandler')
 const rp = require('request-promise')
 const runCode = require('../../lib/runCode')
 
  const run = async (req, res) => {
   const codeParams = req.method === 'GET' ? req.params : req.body
   const { id } = codeParams
-  
   const { 
-    selfUrl, 
-    flyingFunctionHooks,
+    selfUrl,
     flyingFunctionData: {
       code, 
       type, 
@@ -23,28 +23,19 @@ const runCode = require('../../lib/runCode')
 
   try {
     const currentInvocation = invocations + 1
-
-    await codeStorageHandler.updateInvocations(id, currentInvocation)
+    await codeStorageHandler.updateInvocations(_id, currentInvocation)
     const invocationValue = await runCode(code, codeParams, currentInvocation)
 
     const payload = {
       result: invocationValue,
       invocations: currentInvocation,
       self: selfUrl,
-      webhooks: flyingFunctionHooks,
     }
 
-    // run all webhooks
-    // move to mircoservice
-    await Promise.all(flyingFunctionHooks.map((hook) => 
-      rp({
-        uri: hook.url,
-        method: 'POST',
-        body: payload,
-        json: true,
-      })))
-
     res.json(payload)
+
+    const flyingFunctionHooks = await invocationHookHandler.findByFlyingFunctionId(_id)  
+    invcocateFlyingWebhooks(flyingFunctionHooks, payload)
   } catch (error) {
     res.status(500).json({message: error.message})
   } 
