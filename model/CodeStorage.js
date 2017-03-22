@@ -1,9 +1,15 @@
 'use strict'
 
 const mongoose = require('mongoose')
+const shortid = require('shortid')
 
 const CodeStorageSchema = mongoose.Schema({
   
+  urlId: {
+    type: String,
+    required: [true, 'Missing urlId']
+  },
+
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -21,6 +27,28 @@ const CodeStorageSchema = mongoose.Schema({
 
 }, {
   timestamps: true,
+})
+
+CodeStorageSchema.pre('save', function(next) {
+  
+  /**
+   * checks if urlId is used before
+   * re-runs until uniq urlId
+   */
+  const checkAvailability = async () => {
+    const urlId = `${shortid.generate()}${shortid.generate()}`
+    const flyingFunction = await CodeStorage.findOne({ urlId }).exec()
+
+    if(flyingFunction === null){
+      this.urlId = urlId
+      return next()
+    }else{
+      await checkAvailability()
+    }
+  }
+
+  checkAvailability()
+    .catch(error => next(error)) 
 })
 
 const CodeStorage = mongoose.model('CodeStorage', CodeStorageSchema)
