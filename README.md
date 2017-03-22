@@ -1,5 +1,7 @@
 # flying-functions  
-Your functions in the cloud with rest api
+Your functions in the cloud with rest api  
+
+<img src="https://raw.githubusercontent.com/richie-south/flying-functions/master/ff.png" width="200">  
 
 # TODO  
 
