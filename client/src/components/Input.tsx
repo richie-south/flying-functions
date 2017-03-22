@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {store} from '../lib/store'
 import {connect} from 'react-redux'
+import { Input as InputB } from 'reactstrap'
 import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompose'
 import { saveFlyingFunctionName } from '../lib/action-creators/flying-function-name'
 
@@ -17,10 +18,11 @@ type Props = {
 const _Input = ({
   handleChange,
 }: Props) =>
-   <input
+   <InputB
+    placeholder="Enter function name"
     onChange={({ target: { value } }) => handleChange(value)}
    >
     
-  </input>
+  </InputB>
 
 export const Input = enhance(_Input)
