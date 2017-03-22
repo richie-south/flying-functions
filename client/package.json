@@ -1,0 +1,41 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "private": true,
+  "homepage": "http://localhost:5000/",
+  "scripts": {
+    "start": "tscomp start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^15.0.17",
+    "babel-polyfill": "^6.23.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "brace": "^0.10.0",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.4.2",
+    "react-ace": "^4.1.6",
+    "react-addons-css-transition-group": "^15.4.2",
+    "react-addons-transition-group": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "reactstrap": "^4.3.0",
+    "recompose": "^0.22.0",
+    "redux": "^3.6.0",
+    "redux-decorated": "^0.2.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.33",
+    "@types/node": "^7.0.8",
+    "@types/react-dom": "^0.14.23",
+    "@types/react-redux": "^4.4.37",
+    "@types/react-router": "^3.0.8",
+    "@types/recompose": "^0.20.4",
+    "tscomp": "^0.9.1-dev3"
+  }
+}
