@@ -6,8 +6,17 @@ Your functions in the cloud with rest api
 # TODO  
 
 ## client
+- Remake client with react-router
 - CRUD flying function
+  - view 
+  - ~~create~~
+  - update
+  - delete
 - CRUD webhook
+  - view 
+  - create
+  - update
+  - delete
 
 
 ## server  
@@ -28,7 +37,7 @@ Your functions in the cloud with rest api
 # How to
 
 **Function**  
-write your function like this
+write your function like this.
 ```javascript
 /*
  * Function can be async if you want
@@ -39,16 +48,29 @@ module.exports = async (data) => {
   return 10;
 };
 ```
+post it to flying functions like example in API bellow.
+
 
 **Resppnse**  
-Response from server executing function above
+Response from server executing function above.
 ```json
 {
   "result": 10,
   "invocations": 1,
-  "self": "" // url to self
+  "self": "URL TO SELF" 
 }
 ```
+
+# Globals
+accessible from your flying function  
+
+- console
+- Number
+- Math
+- Promise
+- setTimeout
+- request | `request` from npm
+
 
 
 # API
