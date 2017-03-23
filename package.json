@@ -35,6 +35,7 @@
     "babel-cli": "^6.24.0",
     "babel-preset-es2015": "^6.24.0",
     "clear": "0.0.1",
+    "dotenv": "^4.0.0",
     "eslint": "^3.17.1"
   }
 }
