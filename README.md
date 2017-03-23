@@ -32,7 +32,7 @@ Your functions in the cloud with rest api
 - Use express pipes
 - Update api structure
 - ~~async stored function invocations~~
-- Look at solution for persistence storage with flying functions
+- ~~Look at solution for persistence storage with flying functions~~
 
 # How to
 
@@ -43,7 +43,7 @@ write your function like this.
  * Function can be async if you want
  * @param data [express req.query or express req.data]
  */
-module.exports = async (data) => {
+module.exports = async (data, currentInvocation, flyingId) => {
   // your code here
   return 10;
 };
@@ -70,7 +70,41 @@ accessible from your flying function
 - Promise
 - setTimeout
 - request | `request` from npm
+- flyingStorageHandler | Persistent storage handler
 
+# Persistent Storage
+use the global flyingStorageHandler to save/update/view/remove data 
+
+**flyingStorageHandler functions**  
+- name: create
+  - param: collectionId
+  - param: data
+- name: getById
+  - param: id
+- name: getByCollectionId
+  - param: collectionId
+- name: updateDataById
+  - param: id
+  - param data
+- name: remove
+  - param: id
+
+**example**
+
+```javascript
+module.exports = async (data currentInvocation, flyingId) => {
+  // all your saved data will be stored with an collection id 
+  // so you can retrive all data within an collection
+  const collectionId = flyingId
+
+  // data to store has to be object
+  const dataToStore = {
+    value: 10,
+  };
+
+  return await flyingStorageHandler.create(collectionId, dataToStore)
+};
+```
 
 
 # API
