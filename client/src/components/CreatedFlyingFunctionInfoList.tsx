@@ -30,7 +30,7 @@ type Props = {
   urlId: string
 }
 
-const _List = ({
+export const _List = ({
   invocationUrl,
   secretId,
   name,
@@ -39,8 +39,8 @@ const _List = ({
   <ListGroup>
     <ListGroupItem>InvicationURL: <a href={invocationUrl}>{invocationUrl}</a></ListGroupItem>
     <ListGroupItem>SecretId: {secretId}</ListGroupItem>
-    <ListGroupItem>Name: {name}</ListGroupItem>
     <ListGroupItem>UrlId: {urlId}</ListGroupItem>
+    <ListGroupItem>Name: {name}</ListGroupItem>
   </ListGroup>
 
 export const List = enhance(_List)
