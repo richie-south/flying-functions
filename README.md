@@ -69,7 +69,7 @@ accessible from your flying function
 - Math
 - Promise
 - setTimeout
-- request | `request` from npm
+- fetch | `isomorphic-fetch` from npm
 - flyingStorageHandler | Persistent storage handler
 
 # Persistent Storage
