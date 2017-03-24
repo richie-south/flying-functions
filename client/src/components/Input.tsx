@@ -15,7 +15,7 @@ type Props = {
   handleChange: Function,
 }
 
-const _Input = ({
+export const _Input = ({
   handleChange,
 }: Props) =>
    <InputB

@@ -16,7 +16,7 @@ type Props = {
   handleClick: Function,
 }
 
-const _SaveButton = ({
+export const _SaveButton = ({
   handleClick,
 }: Props) =>
    <Button outline color="primary"
