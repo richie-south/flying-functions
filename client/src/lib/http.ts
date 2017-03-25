@@ -1,20 +1,22 @@
 import 'isomorphic-fetch'
 
-const sendFlyingFunctionUrl = 'https://richardsoderman.se/projectflying/flying'
+const getHeaders = () => ({
+  'Accept': 'application/json',
+  'Content-Type': 'application/json' 
+})
 
-const getBody = (code, name) => {
-  return JSON.stringify({
-    name,
-    code,
+export const post = (url, body) => 
+  fetch(url, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(body)
   })
-}
 
-export const postFlyingFunction = ({ code, name }) =>
-  fetch(sendFlyingFunctionUrl, {
-    method: 'POST', 
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json' 
-    },
-    body: getBody(code, name),
+export const get = (url) => 
+  fetch(url)
+
+export const doDelete = (url) => 
+  fetch(url, {
+    method: 'DELETE',
+    headers: getHeaders(),
   })
