@@ -10,5 +10,5 @@ export const createFlyingFunction = ({ code, name }) =>
     name,
   })
 
-export const deleteFlyingFunction = (id) => 
+export const deleteFlyingFunction = (id: string) => 
   doDelete(`${baseUrl}/${flying}/${id}`)
