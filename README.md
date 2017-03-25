@@ -178,3 +178,13 @@ Responce:
   "name": "NAME OF FLYING FUNCTION"
 }
 ```
+
+**DELETE - /flying/:id**  
+*removes flying function*  
+
+Responce:  
+```json
+{
+  "message": "Flying function removed"
+}
+```
