@@ -3,7 +3,7 @@ import {store} from '../lib/store'
 import {connect} from 'react-redux'
 import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompose'
 import {sendFlyingFunction} from '../lib/action-creators/flying-function'
-import { Button } from 'reactstrap'
+import { Button as BButton } from 'reactstrap'
 
 
 const enhance: any = compose(
@@ -14,15 +14,17 @@ const enhance: any = compose(
 
 type Props = {
   handleClick: Function,
+  name: string
 }
 
-export const _SaveButton = ({
+export const _Button = ({
   handleClick,
+  name,
 }: Props) =>
-   <Button outline color="primary"
+   <BButton outline color="primary"
     onClick={() => handleClick()}
    >
-    Send function
-  </Button>
+    {name}
+  </BButton>
 
-export const SaveButton = enhance(_SaveButton)
+export const Button = enhance(_Button)
