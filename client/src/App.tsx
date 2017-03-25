@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { FlyingFunctions } from './components/pages/flyingFunction/FlyingFunctions'
-import BrowserRouter from 'react-router-dom/BrowserRouter'
+import {HashRouter} from 'react-router-dom'
 import Route from 'react-router/Route'
 import { Header } from './components/Header'
 import Switch from 'react-router/Switch'
 
 export const App = () => 
-  <BrowserRouter>
+  <HashRouter>
     <div>
       <Route component={Header}/>
       <Route path='/flying' component={FlyingFunctions} />
     </div>
-  </BrowserRouter>
+  </HashRouter>
