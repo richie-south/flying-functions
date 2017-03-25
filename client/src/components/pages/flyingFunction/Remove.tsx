@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { _Button as Button } from '../Button'
-import { _Input as Input } from '../Input'
-import { deleteFlyingFunction } from '../../lib/dal/flyingFunction'
+import { _Button as Button } from '../../Button'
+import { _Input as Input } from '../../Input'
+import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
 import {compose, withHandlers, withState} from 'recompose'
-import { saveFlyingFunctionName } from '../../lib/action-creators/flying-function-name'
+import { saveFlyingFunctionName } from '../../../lib/action-creators/flying-function-name'
 
 const enhance: any = compose(
   withState('inputValue', 'handleInputValue', ''),
@@ -18,12 +18,13 @@ type Props = {
   handleClick: Function,
 }
 
-export const _RemoveFlyingFunction = ({
+export const _Remove = ({
   handleInputValue,
   handleClick,
 }: Props) =>
   <div>
     <Input
+      placeholder={'Enter secredId'}
       handleChange={value =>  handleInputValue(value)}
     />
     <Button
@@ -32,4 +33,4 @@ export const _RemoveFlyingFunction = ({
     />
   </div>
  
-export const RemoveFlyingFunction = enhance(_RemoveFlyingFunction)
+export const Remove = enhance(_Remove)

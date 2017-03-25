@@ -11,9 +11,8 @@ import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompo
 import { sendFlyingFunction, saveFlyingFunction } from '../lib/action-creators/flying-function';
 
 const enhance: any = compose(
-  //connect(state => ({ flyingFunction })),
   withHandlers({
-    handleChange: ({dispatch}) => code => saveFlyingFunction(store.dispatch, code) 
+    handleChange: () => code => saveFlyingFunction(store.dispatch, code) 
   }),
 )
 

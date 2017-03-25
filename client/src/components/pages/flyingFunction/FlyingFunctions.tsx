@@ -1,10 +1,10 @@
 import * as React from 'react'
-import { CreateFlyingFunction } from './CreateFlyingFunction'
-import { RemoveFlyingFunction } from './RemoveFlyingFunction'
+import { Create } from './Create'
+import { Remove } from './Remove'
 
 import { Route, Link } from 'react-router-dom'
 import { Nav, NavItem, NavLink } from 'reactstrap'
-import { Container } from '../Container'
+import { Container } from '../../Container'
 
 export const FlyingFunctions = ({ match }) => 
   <Container>
@@ -24,10 +24,10 @@ export const FlyingFunctions = ({ match }) =>
       </NavItem>
     </Nav>
 
-    <Route path={`${match.url}/create`} component={CreateFlyingFunction}/>
-    <Route path={`${match.url}/view`} component={CreateFlyingFunction}/>
-    <Route path={`${match.url}/update`} component={CreateFlyingFunction}/>
-    <Route path={`${match.url}/delete`} component={RemoveFlyingFunction}/>
+    <Route path={`${match.url}/create`} component={Create}/>
+    <Route path={`${match.url}/view`} component={Create}/>
+    <Route path={`${match.url}/update`} component={Create}/>
+    <Route path={`${match.url}/delete`} component={Remove}/>
 
     <Route exact path={match.url} render={() => (
       <div>Please select what you want to do.</div>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { FlyingFunctions } from './components/pages/FlyingFunctions'
+import { FlyingFunctions } from './components/pages/flyingFunction/FlyingFunctions'
 import BrowserRouter from 'react-router-dom/BrowserRouter'
 import Route from 'react-router/Route'
 import { Header } from './components/Header'
