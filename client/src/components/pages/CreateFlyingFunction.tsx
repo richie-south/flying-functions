@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { Editor } from '../Editor'
-import { SaveButton } from '../Save-button'
+import { Button } from '../Button'
 import { Input } from '../Input'
-import { List } from '../List'
-import { Container } from '../Container'
+import { List } from '../CreatedFlyingFunctionInfoList'
 
 export const CreateFlyingFunction = () => 
-  <Container>
+  <div>
     <Input/>
     <Editor/>
-    <SaveButton/>
+    <Button name={'Create flying function'}/>
     <List/>
-  </Container>
+  </div>
  
