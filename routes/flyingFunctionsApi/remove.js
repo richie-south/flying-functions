@@ -11,7 +11,6 @@ const create = async (req, res) => {
 
     res.status(200).json({
       message: 'Flying function removed',
-      id: _id,
     })
   } catch (error) {
     res.status(500).json({message: error.message})
