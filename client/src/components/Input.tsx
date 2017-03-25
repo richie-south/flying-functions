@@ -13,16 +13,17 @@ const enhance: any = compose(
 
 type Props = {
   handleChange: Function,
+  placeholder: string
 }
 
 export const _Input = ({
   handleChange,
+  placeholder,
 }: Props) =>
    <InputB
-    placeholder="Enter function name"
+    placeholder={placeholder}
     onChange={({ target: { value } }) => handleChange(value)}
    >
-    
   </InputB>
 
 export const Input = enhance(_Input)
