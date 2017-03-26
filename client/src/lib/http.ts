@@ -20,3 +20,10 @@ export const doDelete = (url: string) =>
     method: 'DELETE',
     headers: getHeaders(),
   })
+
+export const put = (url: string, body: object) => 
+  fetch(url, {
+    method: 'put',
+    headers: getHeaders(),
+    body: JSON.stringify(body)
+  })
