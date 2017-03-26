@@ -83,15 +83,20 @@ use the global flyingStorageHandler to save/update/view/remove data
 - name: create
   - param: collectionId
   - param: data
+  - returns: object
 - name: getById
   - param: id
+  - returns: object
 - name: getByCollectionId
   - param: collectionId
+  - returns: array
 - name: updateDataById
   - param: id
   - param data
+  - returns: object
 - name: remove
   - param: id
+  - returns: object
 
 **example**
 
@@ -106,7 +111,14 @@ module.exports = async (data currentInvocation, flyingId) => {
     value: 10,
   };
 
-  return await flyingStorageHandler.create(collectionId, dataToStore)
+  const storedData = await flyingStorageHandler.create(collectionId, dataToStore)
+  const storedData2 = await flyingStorageHandler.create(collectionId, { value: 11 })
+  // returns storedData object, _id, collectionId, timestamps
+  await flyingStorageHandler.getById(storedData._id)
+  // returns array of all stored objects on collectionId
+  await flyingStorageHandler.getByCollectionId(collectionId) 
+
+  return storedData
 };
 ```
 
