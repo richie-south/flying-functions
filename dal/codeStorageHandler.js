@@ -22,14 +22,14 @@ const getAll = () =>
 const remove = (_id) =>
   CodeStorage.findOne({ _id }).remove().exec()
 
-/*const update = (_id, title, content) =>
-  CodeStorage.update({ _id }, { title, content }).exec()*/
+const update = (_id, code) =>
+  CodeStorage.update({ _id }, { code }).exec()
 
 module.exports = {
   create,
   getById,
   getAll,
-  /*update, */
+  update, 
   getByUrlId,
   remove,
   updateInvocations,
