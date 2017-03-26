@@ -4,6 +4,7 @@ const router = require('express').Router()
 const createSelfUrl = require('../../lib/middleware/createSelfUrl')
 const getFlyingFunctionData = require('../../lib/middleware/getFlyingFunctionData')
 const run = require('./run')
+const update = require('./update')
 const create = require('./create')
 const view = require('./view')
 const viewAll = require('./viewAll')
@@ -29,7 +30,7 @@ router
    */
   .post('/', create)
   // TODO: implement
-  .put('/:id', () => {})
+  .put('/:id', update)
   /**
    * Delete: removes flying function
    */
