@@ -15,7 +15,7 @@ Your functions in the cloud with rest api
 - CRUD flying function
   - ~~view~~
   - ~~create~~
-  - update
+  - ~~update~~
   - ~~delete~~
 - CRUD webhook
   - view 
