@@ -1,36 +1,18 @@
 import * as React from 'react'
-import { _Button as Button } from '../../Button'
-import { _Input as Input } from '../../Input'
 import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
-import {compose, withHandlers, withState} from 'recompose'
-import { saveFlyingFunctionName } from '../../../lib/action-creators/flying-function-name'
+import {compose, withHandlers, withState, defaultProps} from 'recompose'
+import { ButtonWithInput } from '../../ButtonWithInput';
 
 const enhance: any = compose(
+  defaultProps({
+    inputPlaceholder: 'Enter secretId',
+    buttonName: 'Remove function',
+  }),
   withState('inputValue', 'handleInputValue', ''),
   withHandlers({
     handleInputValue: ({handleInputValue}) => (value) => handleInputValue(v => value),
-    handleClick: ({inputValue, handleInputValue}) => () => deleteFlyingFunction(inputValue),
+    handleClick: ({inputValue}) => () => deleteFlyingFunction(inputValue),
   })
 )
 
-type Props = {
-  handleInputValue: Function,
-  handleClick: Function,
-}
-
-export const _Remove = ({
-  handleInputValue,
-  handleClick,
-}: Props) =>
-  <div>
-    <Input
-      placeholder={'Enter secredId'}
-      handleChange={value =>  handleInputValue(value)}
-    />
-    <Button
-      name={'Remove function'}
-      handleClick={() => handleClick()}
-    />
-  </div>
- 
-export const Remove = enhance(_Remove)
+export const Remove = enhance(ButtonWithInput)
