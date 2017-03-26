@@ -3,15 +3,19 @@ Your functions in the cloud with rest api
 
 <img src="https://raw.githubusercontent.com/richie-south/flying-functions/master/ff.png" width="200">  
 
-# TODO  
+# TODO
+
+## doc  
+
+- Update api doc
 
 ## client
 - Remake client with react-router
 - CRUD flying function
-  - view 
+  - ~~view~~
   - ~~create~~
   - update
-  - delete
+  - ~~delete~~
 - CRUD webhook
   - view 
   - create
