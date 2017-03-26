@@ -7,10 +7,13 @@ import {standard} from '../template/code'
 import {connect} from 'react-redux'
 
 import {store} from '../lib/store'
-import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompose'
+import {compose, lifecycle, shouldUpdate, withHandlers, withState, defaultProps} from 'recompose'
 import { sendFlyingFunction, saveFlyingFunction } from '../lib/action-creators/flying-function';
 
 const enhance: any = compose(
+  defaultProps({
+    defaultValue: standard,
+  }),
   withHandlers({
     handleChange: () => code => saveFlyingFunction(store.dispatch, code) 
   }),
@@ -18,10 +21,14 @@ const enhance: any = compose(
 
 type Props = {
   handleChange: Function,
+  defaultValue: string,
+  value: string,
 }
 
 const _Editor = ({
   handleChange,
+  defaultValue,
+  value,
 }: Props) =>
    <AceEditor
     mode="javascript"
@@ -31,7 +38,8 @@ const _Editor = ({
     showGutter={false}
     onChange={value => handleChange(value)}
     name="_AceEditor"
-    defaultValue={standard}
+    value={value}
+    defaultValue={defaultValue}
     tabSize={2}
     editorProps={{$blockScrolling: true} as any}
   />
