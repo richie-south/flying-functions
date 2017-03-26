@@ -2,7 +2,7 @@
 
 const codeStorageHandler = require('../../dal/codeStorageHandler')
 
-const create = async (req, res) => {
+const remove = async (req, res) => {
   const { id } = req.params
   
   try {
@@ -17,4 +17,4 @@ const create = async (req, res) => {
   }
 }
 
-module.exports = create
+module.exports = remove
