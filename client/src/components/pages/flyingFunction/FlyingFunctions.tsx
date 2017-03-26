@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Create } from './Create'
 import { Remove } from './Remove'
-
+import { View } from './View'
 import { Route, Link } from 'react-router-dom'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import { Container } from '../../Container'
@@ -17,15 +17,19 @@ export const FlyingFunctions = ({ match }) =>
         </NavLink>
       </NavItem>
       <NavItem>
+        <Link to={`${match.url}/view`}>
+          View
+        </Link>
+      </NavItem>
+      <NavItem>
         <Link to={`${match.url}/delete`}>
           Delete
         </Link>
-        <NavLink href="#">Link</NavLink>
       </NavItem>
     </Nav>
 
     <Route path={`${match.url}/create`} component={Create}/>
-    <Route path={`${match.url}/view`} component={Create}/>
+    <Route path={`${match.url}/view`} component={View}/>
     <Route path={`${match.url}/update`} component={Create}/>
     <Route path={`${match.url}/delete`} component={Remove}/>
 
