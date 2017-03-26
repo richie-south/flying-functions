@@ -197,6 +197,21 @@ Responce:
 }
 ```
 
+**PUT - /flying/:id**  
+*updates a flying function*  
+Send json object to update flying function  
+```json
+{
+  "code": "CODE FOR FLYING FUNCTION"
+}
+```  
+Responce:  
+```json
+{
+  "message": "Flying function updated"
+}
+```
+
 **DELETE - /flying/:id**  
 *removes flying function*  
 
