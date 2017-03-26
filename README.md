@@ -8,6 +8,7 @@ Your functions in the cloud with rest api
 ## doc  
 
 - Update api doc
+- Add webhook api doc
 
 ## client
 - Remake client with react-router
@@ -77,7 +78,7 @@ accessible from your flying function
 - flyingStorageHandler | Persistent storage handler
 
 # Persistent Storage
-use the global flyingStorageHandler to save/update/view/remove data 
+use the global `flyingStorageHandler` to save/update/view/remove data 
 
 **flyingStorageHandler functions**  
 - name: create
@@ -142,6 +143,7 @@ Responce:
 ```json
 {
   "_id": "ID OF FLYING FUNCTION",
+  "secretId": "SECRET ID TO REMOVE/UPDATE/VIEW",
   "name": "NAME OF FLYING FUNCTION",
   "code": "CODE FOR FLYING FUNCTION",
   "invocations": "NUMBER OF INVOCATIONS FOR FLYING FUNCTION",
