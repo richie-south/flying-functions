@@ -11,7 +11,7 @@ Your functions in the cloud with rest api
 - Add webhook api doc
 
 ## client
-- Remake client with react-router
+- ~~Remake client with react-router~~
 - CRUD flying function
   - ~~view~~
   - ~~create~~
@@ -25,17 +25,15 @@ Your functions in the cloud with rest api
 
 
 ## server  
-- Add public random id, keep mongoose id secret
+- ~~Add public random id, keep mongoose id secre~~
 - Add webhook for function invocations - started
 - ~~Re-implement string evaluation~~
-- Add more globals 
+- Add more globals
   - firebase?
 - ~~Use webhooks~~
-- Add some auth and private functions - removing auth and doing secred id's inseed
+- ~~Add some auth and private functions - removing auth and doing secred~id's inseed~~
   - ~~delete~~
-  - update
-- Use express pipes
-- Update api structure
+  - ~~updat~~
 - ~~async stored function invocations~~
 - ~~Look at solution for persistence storage with flying functions~~
 
@@ -162,7 +160,7 @@ Responce:
 {
   "result": "RESULT FROM FLYING FUNCTION",
   "invocations": "NUMBER OF INVOCATIONS FOR FLYING FUNCTION",
-  "self": "URL TO SELF",
+  "self": "URL TO SELF"
 }
 ```
 
@@ -174,7 +172,7 @@ Responce:
 {
   "result": "RESULT FROM FLYING FUNCTION",
   "invocations": "NUMBER OF INVOCATIONS OF FLYING FUNCTION",
-  "self": "URL TO SELF",
+  "self": "URL TO SELF"
 }
 ```
 
