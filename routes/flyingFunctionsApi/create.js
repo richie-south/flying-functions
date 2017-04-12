@@ -13,6 +13,7 @@ const create = async (req, res) => {
     const { _id, urlId } = await codeStorageHandler.create(transformedCode, name)
 
     res.status(200).json({
+      message: 'Flying function created!',
       invocationUrl: urlCreator(req.get('host'), name, urlId),
       secretId: _id,
       urlId,

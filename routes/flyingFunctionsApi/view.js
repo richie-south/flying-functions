@@ -7,6 +7,7 @@ const view = (req, res) => {
   const { name, urlId } = flyingFunctionData
 
   const responseObject = Object.assign({}, flyingFunctionData, {
+    message: 'Success',
     invocationUrl: urlCreator(req.get('host'), name, urlId),
     self: selfUrl, 
   })
