@@ -2,6 +2,7 @@ import * as React from 'react'
 import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
 import {compose, withHandlers, withState, defaultProps} from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
+import { TypeOfMessage, getMessageTypeFromHttpStatus } from '../../Message';
 
 const enhance: any = compose(
   defaultProps({
@@ -9,8 +10,24 @@ const enhance: any = compose(
     buttonName: 'Remove function',
   }),
   withState('inputValue', 'handleInputValue', ''),
+  withState('displayMessage', 'setDisplayMessage', false),
+  withState('message', 'setMessage', ''),
+  withState('messageType', 'setMessageType', TypeOfMessage),
   withHandlers({
-    handleClick: ({inputValue}) => async () => await deleteFlyingFunction(inputValue),
+    handleClick: ({inputValue, setMessage, setMessageType, setDisplayMessage}) => async () => {
+      try {
+        const response = await deleteFlyingFunction(inputValue)  
+        const { id, message } = await response.json()
+
+        setMessage(message)
+        setMessageType(getMessageTypeFromHttpStatus(response.status))
+        setDisplayMessage(true)
+      } catch (error) {
+        setMessage(error.message)
+        setMessageType(TypeOfMessage.Danger)
+        setDisplayMessage(true)
+      }
+  },
   })
 )
 

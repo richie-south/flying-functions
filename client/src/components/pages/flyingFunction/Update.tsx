@@ -6,6 +6,7 @@ import { _Button as Button } from '../../Button';
 import { saveFlyingFunction } from '../../../lib/action-creators/flying-function';
 import { Editor } from '../../Editor'
 import { store } from '../../../lib/store'
+import { TypeOfMessage, getMessageTypeFromHttpStatus } from '../../Message';
 
 const enhance: any = compose(
   defaultProps({
@@ -15,29 +16,43 @@ const enhance: any = compose(
   }),
   withState('inputValue', 'handleInputValue', ''),
   withState('editorValue', 'handleEditorValue', ''),
+  withState('displayMessage', 'setDisplayMessage', false),
+  withState('message', 'setMessage', ''),
+  withState('messageType', 'setMessageType', TypeOfMessage),
   withHandlers({
     handleChange: () => code => saveFlyingFunction(store.dispatch, code),
     
-    sendFlyingFunctionUpdate: ({ inputValue }) => async () => {
+    sendFlyingFunctionUpdate: ({ inputValue, setMessage, setMessageType, setDisplayMessage }) => async () => {
       const { flyingFunction }: any = store.getState()
       try {
-        await updateFlyingFunction(inputValue, flyingFunction)  
+        const response = await updateFlyingFunction(inputValue, flyingFunction)  
+        const { message } = await response.json()
+        setMessage(message)
+        setMessageType(getMessageTypeFromHttpStatus(response.status))
+        setDisplayMessage(true)
       } catch (error) {
-        // handle errors
+        setMessage(error.message)
+        setMessageType(TypeOfMessage.Danger)
+        setDisplayMessage(true)
       }
       
     },
 
-    getFlyingFunctionData: ({ inputValue, handleEditorValue }) => async () => {
+    getFlyingFunctionData: ({ inputValue, handleEditorValue, setMessage, setMessageType, setDisplayMessage }) => async () => {
       try {
         const response = await viewFlyingFunction(inputValue)
         const data = await response.json()
         if(!data.hasOwnProperty('code')){
-          throw 'error'
+          throw new Error('You need to enter valid flying function id')
         }
         handleEditorValue(v => data.code)
+        setMessage(data.message)
+        setMessageType(getMessageTypeFromHttpStatus(response.status))
+        setDisplayMessage(true)
       } catch (error) {
-        // TODO: handle error
+        setMessage(error.message)
+        setMessageType(TypeOfMessage.Danger)
+        setDisplayMessage(true)
       }
     },
   })
@@ -52,6 +67,9 @@ type Props = {
   buttonName: string,
   editorValue: string,
   buttonSaveName: string,
+  messageType: TypeOfMessage,
+  message: string,
+  displayMessage: boolean,
 }
 
 export const _Update = ({
@@ -63,9 +81,15 @@ export const _Update = ({
   buttonName,
   editorValue,
   buttonSaveName,
+  messageType,
+  message,
+  displayMessage,
 }: Props) => 
   <div>
     <ButtonWithInput
+      messageType={messageType}
+      message={message}
+      displayMessage={displayMessage}
       inputPlaceholder={inputPlaceholder}
       buttonName={buttonName}
       handleInputValue={value =>  handleInputValue(value)}

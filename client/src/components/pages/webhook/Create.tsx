@@ -15,24 +15,24 @@ const enhance: any = compose(
   withState('urlInput', 'handleUrlInput', ''),
   withState('idInput', 'handleIdInput', ''),
   withState('secretId', 'setSecretId', ''),
-  withState('doDisplayMessage', 'setDoDisplayMessage', false),
+  withState('displayMessage', 'setDisplayMessage', false),
   withState('message', 'setMessage', ''),
   withState('messageType', 'setMessageType', TypeOfMessage),
 
   withHandlers({
-    handleSubmit: ({urlInput, idInput, setSecretId, setDoDisplayMessage, setMessage, setMessageType, displayMessage}) => async () => {
+    handleSubmit: ({urlInput, idInput, setSecretId, setDisplayMessage, setMessage, setMessageType}) => async () => {
       try {
         const response = await createWebhook(idInput, urlInput) as any
         const { id, message } = await response.json()
 
         setMessage(message)
         setMessageType(getMessageTypeFromHttpStatus(response.status))
-        setDoDisplayMessage(true)
+        setDisplayMessage(true)
         setSecretId(id)
       } catch (error) {
         setMessage(error.message)
         setMessageType(TypeOfMessage.Danger)
-        setDoDisplayMessage(true)
+        setDisplayMessage(true)
       }
     }
   })
@@ -46,7 +46,7 @@ type Props = {
   inputIdPlaceholder: string,
   buttonName: string,
   secretId: string,
-  doDisplayMessage: boolean,
+  displayMessage: boolean,
   message: string
   messageType: TypeOfMessage,
 }
@@ -59,12 +59,17 @@ export const _Create = ({
   inputIdPlaceholder,
   buttonName,
   secretId,
-  doDisplayMessage,
+  displayMessage,
   message,
   messageType,
 }: Props) =>
   <div>
-    {doDisplayMessage && <Message messageType={messageType} message={message} />}
+    {displayMessage && 
+      <Message 
+        messageType={messageType} 
+        message={message} 
+      />
+    }
     <Input 
       placeholder={inputUrlPlaceholder}
       handleChange={value => handleUrlInput(value)}
