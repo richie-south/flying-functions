@@ -8,7 +8,6 @@ const remove = async (req, res, next) => {
     await invocationHookHandler.remove(id)  
     res.status(200).json({
       message: 'webhook removed!',
-      id: _id,
     })
   } catch (error) {
     res.status(500).json({message: error.message})
