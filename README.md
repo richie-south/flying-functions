@@ -7,8 +7,8 @@ Your functions in the cloud with rest api
 
 ## doc  
 
-- Update api doc
-- Add webhook api doc
+- ~~Update api doc~~
+- ~~Add webhook api doc~~
 
 ## client
 - ~~Remake client with react-router~~
@@ -35,7 +35,7 @@ Your functions in the cloud with rest api
   - ~~updat~~
 - ~~async stored function invocations~~
 - ~~Look at solution for persistence storage with flying functions~~
-- Update webhook api 
+- ~~Update webhook api~~
 
 # How to
 
@@ -220,3 +220,29 @@ Responce:
   "message": "Flying function removed"
 }
 ```
+
+## Webhook
+
+**POST - /webhook/:id**  
+*creates a new webhook*  
+Send json object to create webhook  
+```json
+{
+  "url": "WEBHOOK URL"
+}
+```  
+Responce:  
+```json
+{
+  "url": "WEBHOOK URL",
+  "id": "ID OF WEBHOOK",
+}
+```
+**DELETE - /webhook/:id**  
+*removes webhook*  
+
+Responce:  
+```json
+{
+  "message": "webhook removed!"
+}
