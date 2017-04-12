@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "private": true,
-  "homepage": "https://richardsoderman.se/projectflying/",
+  "homepage": "https://richie-south.github.io/flying-functions/",
   "scripts": {
     "start": "tscomp start",
     "build": "tscomp build",
