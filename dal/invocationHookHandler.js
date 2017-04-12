@@ -2,8 +2,8 @@
 
 const InvocationHook = require('../model/InvocationHook')
 
-const create = (url, functionToInvocId) => 
-  new InvocationHook({ url, functionToInvocId }).save()
+const create = (functionToInvocId, url) => 
+  new InvocationHook({ functionToInvocId, url }).save()
 
 const getById = (_id) => 
   InvocationHook.findOne({ _id })
