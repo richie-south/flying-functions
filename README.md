@@ -28,6 +28,7 @@ Your functions in the cloud with rest api
 - Add webhook for function invocations - started
 - ~~Re-implement string evaluation~~
 - Add more globals
+- Add better api error messages
 - ~~Use webhooks~~
 - ~~Add some auth and private functions - removing auth and doing secred~id's inseed~~
   - ~~delete~~
