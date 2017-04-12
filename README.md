@@ -12,16 +12,15 @@ Your functions in the cloud with rest api
 
 ## client
 - ~~Remake client with react-router~~
+- Validation messages
 - CRUD flying function
   - ~~view~~
   - ~~create~~
   - ~~update~~
   - ~~delete~~
-- CRUD webhook
-  - view 
-  - create
-  - update
-  - delete
+- webhook
+  - ~~create~~
+  - ~~delete~~~
 
 
 ## server  
@@ -43,8 +42,9 @@ Your functions in the cloud with rest api
 write your function like this.
 ```javascript
 /*
- * Function can be async if you want
- * @param data [express req.query or express req.data]
+ * @param data [express req.query (GET) or express req.data (POST)]
+ * @param currentInvocation [nr of times function has been invocated]
+ * @param flyingId [uniq id for flying function, same as uniq id in url]
  */
 module.exports = async (data, currentInvocation, flyingId) => {
   // your code here
