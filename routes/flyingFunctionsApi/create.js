@@ -3,6 +3,7 @@
 const codeTransformer = require('../../lib/codeTransformer')
 const urlCreator = require('../utils/runUrlCreator')
 const codeStorageHandler = require('../../dal/codeStorageHandler')
+const mongooseErrors = require('../../lib/customErrors/mongooseErrors')
 
 const create = async (req, res) => {
   const { code, name } = req.body
@@ -18,6 +19,15 @@ const create = async (req, res) => {
       name,
     })
   } catch (error) {
+    if(mongooseErrors.isValidatorError(error)){
+      return res.status(400).json({
+        message: error.errors.value.message,
+      })
+    }else if(mongooseErrors.isCastError(error)){
+      return res.status(400).json({
+        message: error.message,
+      })
+    }
     res.status(500).json({message: error.message})
   }
 }
