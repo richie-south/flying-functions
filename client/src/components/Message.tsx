@@ -16,6 +16,8 @@ export const getMessageTypeFromHttpStatus = (status) => {
       return TypeOfMessage.Success
     case 500:
       return TypeOfMessage.Danger
+    case 400:
+      return TypeOfMessage.Warning
     default:
       return TypeOfMessage.Info
   }
