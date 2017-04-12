@@ -10,7 +10,7 @@ router
   /**
    * Create new hook
    */
-  .post('/:id', getFlyingFunctionData, create)
+  .post('/:id', getFlyingFunctionData.ByUrlId, create)
   /**
    * Delete: removes webhook
    */

@@ -9,7 +9,7 @@ import { Message, TypeOfMessage, getMessageTypeFromHttpStatus } from '../../Mess
 const enhance: any = compose(
   defaultProps({
     inputUrlPlaceholder: 'Enter webhook url',
-    inputIdPlaceholder: 'Enter flyingFunction id',
+    inputIdPlaceholder: 'Enter flyingFunction urlId',
     buttonName: 'Create webhook',
   }),
   withState('urlInput', 'handleUrlInput', ''),
