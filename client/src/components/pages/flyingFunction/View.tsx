@@ -18,7 +18,6 @@ const enhance: any = compose(
       updatedAt: ' ',
     }),
   withHandlers({
-    handleInputValue: ({handleInputValue}) => (value) => handleInputValue(v => value),
     handleClick: ({inputValue, handleListValues}) => async () => {
       try {
         const response = await viewFlyingFunction(inputValue)

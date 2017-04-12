@@ -17,7 +17,6 @@ const enhance: any = compose(
   withState('editorValue', 'handleEditorValue', ''),
   withHandlers({
     handleChange: () => code => saveFlyingFunction(store.dispatch, code),
-    handleInputValue: ({handleInputValue}) => (value) => handleInputValue(v => value),
     
     sendFlyingFunctionUpdate: ({ inputValue }) => async () => {
       const { flyingFunction }: any = store.getState()

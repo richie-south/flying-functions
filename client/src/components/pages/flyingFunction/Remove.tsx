@@ -10,8 +10,7 @@ const enhance: any = compose(
   }),
   withState('inputValue', 'handleInputValue', ''),
   withHandlers({
-    handleInputValue: ({handleInputValue}) => (value) => handleInputValue(v => value),
-    handleClick: ({inputValue}) => () => deleteFlyingFunction(inputValue),
+    handleClick: ({inputValue}) => async () => await deleteFlyingFunction(inputValue),
   })
 )
 
