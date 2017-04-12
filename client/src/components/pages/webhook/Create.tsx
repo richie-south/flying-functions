@@ -23,9 +23,9 @@ const enhance: any = compose(
     handleSubmit: ({urlInput, idInput, setSecretId, setDoDisplayMessage, setMessage, setMessageType, displayMessage}) => async () => {
       try {
         const response = await createWebhook(idInput, urlInput) as any
-        const { id } = await response.json()
+        const { id, message } = await response.json()
 
-        setMessage(response.statusText)
+        setMessage(message)
         setMessageType(getMessageTypeFromHttpStatus(response.status))
         setDoDisplayMessage(true)
         setSecretId(id)
