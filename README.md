@@ -136,7 +136,7 @@ Responce:
 ]
 ```
 
-**GET - /flying/:id**  
+**GET - /flying/:secretId**  
 *info about flying function*  
 Responce:
 ```json
@@ -196,7 +196,7 @@ Responce:
 }
 ```
 
-**PUT - /flying/:id**  
+**PUT - /flying/:secretId**  
 *updates a flying function*  
 Send json object to update flying function  
 ```json
@@ -223,7 +223,7 @@ Responce:
 
 ## Webhook
 
-**POST - /webhook/:id**  
+**POST - /webhook/:urlId**  
 *creates a new webhook*  
 Send json object to create webhook  
 ```json
