@@ -1,17 +1,20 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
-import { Nav as BNav, NavItem, NavLink } from 'reactstrap'
+import { Link, Route } from 'react-router-dom'
+import { Nav as BNav, NavItem } from 'reactstrap'
+import { NavLink } from '../../CustomLink';
 
 export const Nav =({ match }) => 
   <BNav>
     <NavItem>
-      <Link className={'nav-link'} to={`${match.url}/create`}>
-        Create
-      </Link>
+      <NavLink 
+        children={'Create'}
+        to={`${match.url}/create`}
+      />
     </NavItem>
     <NavItem>
-      <Link className={'nav-link'} to={`${match.url}/delete`}>
-        Delete
-      </Link>
+      <NavLink 
+        children={'Delete'}
+        to={`${match.url}/delete`}
+      />
     </NavItem>
   </BNav>
