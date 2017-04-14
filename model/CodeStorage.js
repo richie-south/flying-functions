@@ -36,7 +36,7 @@ CodeStorageSchema.pre('save', function(next) {
    * re-runs until uniq urlId
    */
   const checkAvailability = async () => {
-    const urlId = `${shortid.generate()}${shortid.generate()}`
+    const urlId = shortid.generate() //`${shortid.generate()}${shortid.generate()}`
     const flyingFunction = await CodeStorage.findOne({ urlId }).exec()
 
     if(flyingFunction === null){
