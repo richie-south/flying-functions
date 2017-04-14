@@ -18,6 +18,7 @@ const runCode = require('../../lib/runCode')
       invocations, 
       name, 
       _id,
+      urlId,
     },
   } = res.locals
 
@@ -33,8 +34,8 @@ const runCode = require('../../lib/runCode')
     }
 
     res.json(payload)
-
-    const flyingFunctionHooks = await invocationHookHandler.findByFlyingFunctionId(_id)  
+    
+    const flyingFunctionHooks = await invocationHookHandler.findByFlyingFunctionId(urlId)  
     invcocateFlyingWebhooks(flyingFunctionHooks, payload)
   } catch (error) {
     res.status(500).json({message: error.message})

@@ -10,7 +10,7 @@ const InvocationHookSchema = mongoose.Schema({
   },
 
   functionToInvocId: { 
-    type: mongoose.Schema.Types.ObjectId, 
+    type: String, 
     ref: 'CodeStorage',
   },
 
