@@ -33,7 +33,7 @@ const _Editor = ({
    <AceEditor
     mode="javascript"
     theme="monokai"
-    height={'300px'}
+    height={'400px'}
     width={'600px'}
     showGutter={false}
     onChange={value => handleChange(value)}
