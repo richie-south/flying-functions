@@ -6,17 +6,18 @@ Your functions in the cloud with rest api
 # TODO
 
 ## doc  
-
-- ~~Update api doc~~
-- ~~Add webhook api doc~~
+- Update Persistent Storage doc
 
 ## client
 - Validation messages
+- Add button to show available globals and examples 
+- Add dropdown for GET or POST 
 
 
 ## server  
 - Add more globals
 - Add better api error messages
+- Add option for GET or POST
 - Add github login to save flying-functions and webhooks under user id?
 
 # How to
