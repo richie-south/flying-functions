@@ -1,9 +1,8 @@
 import * as React from 'react'
 import {connect} from 'react-redux'
 import { Alert } from 'reactstrap'
-//import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompose'
 
-export enum TypeOfMessage {
+export enum MessageType {
   Success,
   Info,
   Warning,
@@ -13,14 +12,25 @@ export enum TypeOfMessage {
 export const getMessageTypeFromHttpStatus = (status) => {
   switch (status) {
     case 200:
-      return TypeOfMessage.Success
+      return MessageType.Success
     case 500:
-      return TypeOfMessage.Danger
+      return MessageType.Danger
     case 400:
-      return TypeOfMessage.Warning
+      return MessageType.Warning
     default:
-      return TypeOfMessage.Info
+      return MessageType.Info
   }
+}
+
+export type MessageProps = {
+  messageType: MessageType,
+  message: string,
+  displayMessage: boolean,
+}
+
+type Props = {
+  message: string,
+  messageType: MessageType,
 }
 
 const color = [
@@ -29,11 +39,6 @@ const color = [
   'warning',
   'danger',
 ]
-
-type Props = {
-  message: string,
-  messageType: TypeOfMessage,
-}
 
 const getAlertColor = (type) => {
   return color[type]
