@@ -11,31 +11,13 @@ Your functions in the cloud with rest api
 - ~~Add webhook api doc~~
 
 ## client
-- ~~Remake client with react-router~~
 - Validation messages
-- CRUD flying function
-  - ~~view~~
-  - ~~create~~
-  - ~~update~~
-  - ~~delete~~
-- webhook
-  - ~~create~~
-  - ~~delete~~~
 
 
 ## server  
-- ~~Add public random id, keep mongoose id secre~~
-- Add webhook for function invocations - started
-- ~~Re-implement string evaluation~~
 - Add more globals
 - Add better api error messages
-- ~~Use webhooks~~
-- ~~Add some auth and private functions - removing auth and doing secred~id's inseed~~
-  - ~~delete~~
-  - ~~updat~~
-- ~~async stored function invocations~~
-- ~~Look at solution for persistence storage with flying functions~~
-- ~~Update webhook api~~
+- Add github login to save flying-functions and webhooks under user id?
 
 # How to
 
