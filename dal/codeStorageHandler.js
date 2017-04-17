@@ -2,8 +2,8 @@
 
 const CodeStorage = require('../model/CodeStorage')
 
-const create = (code, name, invocations = 0) => 
-  new CodeStorage({ code, name, invocations, urlId: '00' }).save()
+const create = (code, originalCode, name, invocations = 0) => 
+  new CodeStorage({ code, originalCode, name, invocations, urlId: '00' }).save()
 
 const getById = (_id) => 
   CodeStorage.findOne({ _id })
@@ -22,8 +22,8 @@ const getAll = () =>
 const remove = (_id) =>
   CodeStorage.findOne({ _id }).remove().exec()
 
-const update = (_id, code) =>
-  CodeStorage.update({ _id }, { code }).exec()
+const update = (_id, code, originalCode) =>
+  CodeStorage.update({ _id }, { code, originalCode }).exec()
 
 module.exports = {
   create,
