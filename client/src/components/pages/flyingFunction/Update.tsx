@@ -6,10 +6,8 @@ import { _Button as Button } from '../../Button';
 import { saveFlyingFunction } from '../../../lib/action-creators/flying-function';
 import { Editor } from '../../Editor'
 import { store } from '../../../lib/store'
-import { MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
+import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 import { flyingFunction } from '../../../lib/reducers/flying-function';
-
-
 
 const enhance: any = compose(
   defaultProps({
@@ -19,36 +17,36 @@ const enhance: any = compose(
   }),
   withState('inputValue', 'handleInputValue', ''),
   withState('editorValue', 'handleEditorValue', ''),
-  withState('message', 'setMessage', {
-    messageType: MessageType.Info,
+  withState('alertProps', 'setAlert', {
+    type: AlertType.Info,
     message: '',
-    displayMessage: false,
-  } as MessageProps),
+    display: false,
+  } as AlertProps),
 
   withHandlers({
     handleChange: () => code => saveFlyingFunction(store.dispatch, code),
-    sendFlyingFunctionUpdate: ({ inputValue, setMessage, handleEditorValue }) => async () => {
+    sendFlyingFunctionUpdate: ({ inputValue, setAlert, handleEditorValue }) => async () => {
       const { flyingFunction }: any = store.getState()
       handleEditorValue(flyingFunction)
       try {
         const response = await updateFlyingFunction(inputValue, flyingFunction)  
         const { message } = await response.json()
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
-          message: message,
-          displayMessage: true,
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
+          message,
+          display: true,
         })
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
       
     },
 
-    getFlyingFunctionData: ({ inputValue, handleEditorValue, setMessage }) => async () => {
+    getFlyingFunctionData: ({ inputValue, handleEditorValue, setAlert }) => async () => {
       try {
         const response = await viewFlyingFunction(inputValue)
         const data = await response.json()
@@ -57,16 +55,16 @@ const enhance: any = compose(
         }
         handleEditorValue(data.originalCode)
 
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
           message: data.message,
-          displayMessage: true,
+          display: true,
         })
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
     },
@@ -82,7 +80,7 @@ type Props = {
   buttonName: string,
   editorValue: string,
   buttonSaveName: string,
-  message: MessageProps,
+  alertProps: AlertProps,
 }
 
 export const _Update = ({
@@ -94,11 +92,11 @@ export const _Update = ({
   buttonName,
   editorValue,
   buttonSaveName,
-  message,
+  alertProps,
 }: Props) => 
   <div>
     <ButtonWithInput
-      message={message}
+      alertProps={alertProps}
       inputPlaceholder={inputPlaceholder}
       buttonName={buttonName}
       handleInputValue={value =>  handleInputValue(value)}

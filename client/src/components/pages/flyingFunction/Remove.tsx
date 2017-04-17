@@ -2,7 +2,7 @@ import * as React from 'react'
 import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
 import {compose, withHandlers, withState, defaultProps} from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
-import { MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
+import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 
 const enhance: any = compose(
   defaultProps({
@@ -10,26 +10,26 @@ const enhance: any = compose(
     buttonName: 'Remove function',
   }),
   withState('inputValue', 'handleInputValue', ''),
-  withState('message', 'setMessage', {
-    messageType: MessageType.Info,
+  withState('alertProps', 'setAlert', {
+    type: AlertType.Info,
     message: '',
-    displayMessage: false,
-  } as MessageProps),
+    display: false,
+  } as AlertProps),
   withHandlers({
-    handleClick: ({inputValue, setMessage}) => async () => {
+    handleClick: ({inputValue, setAlert}) => async () => {
       try {
         const response = await deleteFlyingFunction(inputValue)  
         const { id, message } = await response.json()
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
           message: message,
-          displayMessage: true,
+          display: true,
         })
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
   },

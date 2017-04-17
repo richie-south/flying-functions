@@ -2,7 +2,7 @@ import * as React from 'react'
 import { deleteWebhook } from '../../../lib/dal/webhook'
 import {compose, withHandlers, withState, defaultProps} from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
-import { MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
+import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 
 
 const enhance: any = compose(
@@ -11,26 +11,26 @@ const enhance: any = compose(
     buttonName: 'Remove webhook',
   }),
   withState('inputValue', 'handleInputValue', ''),
-  withState('message', 'setMessage', {
-    messageType: MessageType.Info,
+  withState('alertProps', 'setAlert', {
+    type: AlertType.Info,
     message: '',
-    displayMessage: false,
-  } as MessageProps),
+    display: false,
+  } as AlertProps),
   withHandlers({
-    handleClick: ({inputValue, setMessage}) => async () => {
+    handleClick: ({inputValue, setAlert}) => async () => {
       try {
         const response = await deleteWebhook(inputValue)  
         const { id, message } = await response.json()
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
-          message: message,
-          displayMessage: true,
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
+          message,
+          display: true,
         })
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
       

@@ -4,7 +4,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
 import { createWebhook } from '../../../lib/dal/webhook'
 import { _Button as Button } from '../../Button';
 import { _Input as Input } from '../../Input'
-import { Message, MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
+import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 
 const enhance: any = compose(
   defaultProps({
@@ -15,28 +15,28 @@ const enhance: any = compose(
   withState('urlInput', 'handleUrlInput', ''),
   withState('idInput', 'handleIdInput', ''),
   withState('secretId', 'setSecretId', ''),
-  withState('message', 'setMessage', {
-    messageType: MessageType.Info,
+  withState('alertProps', 'setAlert', {
+    type: AlertType.Info,
     message: '',
-    displayMessage: false,
-  } as MessageProps),
+    display: false,
+  } as AlertProps),
 
   withHandlers({
-    handleSubmit: ({urlInput, idInput, setSecretId, setMessage}) => async () => {
+    handleSubmit: ({urlInput, idInput, setSecretId, setAlert}) => async () => {
       try {
         const response = await createWebhook(idInput, urlInput) as any
         const { id, message } = await response.json()
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
-          message: message,
-          displayMessage: true,
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
+          message,
+          display: true,
         })
         setSecretId(id)
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
     }
@@ -51,7 +51,7 @@ type Props = {
   inputIdPlaceholder: string,
   buttonName: string,
   secretId: string,
-  message: MessageProps,
+  alertProps: AlertProps,
 }
 
 export const _Create = ({
@@ -62,15 +62,14 @@ export const _Create = ({
   inputIdPlaceholder,
   buttonName,
   secretId,
-  message,
+  alertProps,
 }: Props) =>
   <div>
-    {message.displayMessage && 
-      <Message 
-        messageType={message.messageType} 
-        message={message.message} 
-      />
-    }
+    <Alert 
+      type={alertProps.type}
+      message={alertProps.message} 
+      display={alertProps.display}
+    />
     <Input 
       placeholder={inputUrlPlaceholder}
       handleChange={value => handleUrlInput(value)}

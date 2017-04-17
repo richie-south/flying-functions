@@ -4,7 +4,7 @@ import { viewFlyingFunction } from '../../../lib/dal/flyingFunction'
 import {compose, withHandlers, withState, defaultProps} from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
 import { _List as List, Props as ListProps } from '../../FlyingFunctionInfoList';
-import { MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
+import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 
 
 const enhance: any = compose(
@@ -20,13 +20,13 @@ const enhance: any = compose(
       createdAt: ' ',
       updatedAt: ' ',
     }),
-  withState('message', 'setMessage', {
-    messageType: MessageType.Info,
+  withState('alertProps', 'setAlert', {
+    type: AlertType.Info,
     message: '',
-    displayMessage: false,
-  } as MessageProps),
+    display: false,
+  } as AlertProps),
   withHandlers({
-    handleClick: ({inputValue, handleListValues, setMessage}) => async () => {
+    handleClick: ({inputValue, handleListValues, setAlert}) => async () => {
       try {
         const response = await viewFlyingFunction(inputValue)
         const data = await response.json()
@@ -35,16 +35,16 @@ const enhance: any = compose(
           throw new Error('You need to enter valid flying function id')
         }
         handleListValues(v => data)
-        setMessage({
-          messageType: getMessageTypeFromHttpStatus(response.status),
+        setAlert({
+          type: getAlertTypeFromHttpStatus(response.status),
           message: data.message,
-          displayMessage: true,
+          display: true,
         })
       } catch (error) {
-        setMessage({
-          messageType: MessageType.Danger,
+        setAlert({
+          type: AlertType.Danger,
           message: error.message,
-          displayMessage: true,
+          display: true,
         })
       }
     },
@@ -57,7 +57,7 @@ type Props = {
   inputPlaceholder: string,
   buttonName: string,
   listValues: ListProps,
-  message: MessageProps,
+  alertProps: AlertProps,
 }
 
 export const _View = ({
@@ -66,11 +66,11 @@ export const _View = ({
   inputPlaceholder,
   buttonName,
   listValues,
-  message,
+  alertProps,
 }: Props) =>
   <div>
     <ButtonWithInput
-      message={message}
+      alertProps={alertProps}
       inputPlaceholder={inputPlaceholder}
       buttonName={buttonName}
       handleInputValue={value =>  handleInputValue(value)}
