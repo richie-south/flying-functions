@@ -29,6 +29,7 @@ export type Props = {
   name: string,
   urlId: string,
   code?: string,
+  originalCode?: string,
   invocations?: number,
   createdAt?: string,
   updatedAt?: string,
@@ -40,19 +41,21 @@ export const _List = ({
   name,
   urlId,
   code,
+  originalCode,
   invocations,
   createdAt,
   updatedAt,
 }: Props) =>
   <ListGroup>
-    <ListGroupItem>InvicationURL: <a href={invocationUrl}>{invocationUrl}</a></ListGroupItem>
-    <ListGroupItem>SecretId: {secretId}</ListGroupItem>
-    <ListGroupItem>UrlId: {urlId}</ListGroupItem>
-    <ListGroupItem>Name: {name}</ListGroupItem>
-    {invocations !== 0 && <ListGroupItem>Invocations: {invocations === -1 ? 0 : invocations }</ListGroupItem>}
-    {createdAt && <ListGroupItem>CreatedAt: {createdAt}</ListGroupItem>}
-    {updatedAt && <ListGroupItem>UpdatedAt: {updatedAt}</ListGroupItem>}
-    {code && <ListGroupItem>Code: <pre>{code}</pre></ListGroupItem>}
+    <ListGroupItem><b>InvicationURL:</b> <a href={invocationUrl}>{invocationUrl}</a></ListGroupItem>
+    <ListGroupItem><b>SecretId:</b> {secretId}</ListGroupItem>
+    <ListGroupItem><b>UrlId:</b> {urlId}</ListGroupItem>
+    <ListGroupItem><b>Name:</b> {name}</ListGroupItem>
+    {invocations !== 0 && <ListGroupItem><b>Invocations:</b> {invocations === -1 ? 0 : invocations }</ListGroupItem>}
+    {createdAt && <ListGroupItem><b>CreatedAt:</b> {createdAt}</ListGroupItem>}
+    {updatedAt && <ListGroupItem><b>UpdatedAt:</b> {updatedAt}</ListGroupItem>}
+    {code && <ListGroupItem><b>Transformed code:</b> <pre>{code}</pre></ListGroupItem>}
+    {originalCode && <ListGroupItem><b>Original code:</b> <pre>{originalCode}</pre></ListGroupItem>}
   </ListGroup>
 
 export const List = enhance(_List)

@@ -1,5 +1,6 @@
 'use strict'
 
+const codeTransformer = require('../../lib/codeTransformer')
 const codeStorageHandler = require('../../dal/codeStorageHandler')
 const mongooseErrors = require('../../lib/customErrors/mongooseErrors')
 
@@ -8,8 +9,8 @@ const update = async (req, res) => {
   const { code } = req.body
   
   try {
-    
-    await codeStorageHandler.update(id, code)
+    const transformedCode = codeTransformer(code)
+    await codeStorageHandler.update(id, transformedCode, code)
 
     res.status(200).json({
       message: 'Flying function updated',

@@ -10,7 +10,7 @@ const create = async (req, res) => {
 
   try {
     const transformedCode = codeTransformer(code)
-    const { _id, urlId } = await codeStorageHandler.create(transformedCode, name)
+    const { _id, urlId } = await codeStorageHandler.create(transformedCode, code, name)
 
     res.status(200).json({
       message: 'Flying function created!',
