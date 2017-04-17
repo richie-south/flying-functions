@@ -20,6 +20,11 @@ const CodeStorageSchema = mongoose.Schema({
     required: [true, 'Code is required'],
   },
 
+  originalCode: {
+    type: String,
+    required: [true, 'Original code must be saved']
+  },
+
   invocations: {
     type: Number,
     default: 0,
