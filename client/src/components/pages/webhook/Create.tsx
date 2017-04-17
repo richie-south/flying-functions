@@ -4,7 +4,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap'
 import { createWebhook } from '../../../lib/dal/webhook'
 import { _Button as Button } from '../../Button';
 import { _Input as Input } from '../../Input'
-import { Message, TypeOfMessage, getMessageTypeFromHttpStatus } from '../../Message';
+import { Message, MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
 
 const enhance: any = compose(
   defaultProps({
@@ -15,24 +15,29 @@ const enhance: any = compose(
   withState('urlInput', 'handleUrlInput', ''),
   withState('idInput', 'handleIdInput', ''),
   withState('secretId', 'setSecretId', ''),
-  withState('displayMessage', 'setDisplayMessage', false),
-  withState('message', 'setMessage', ''),
-  withState('messageType', 'setMessageType', TypeOfMessage),
+  withState('message', 'setMessage', {
+    messageType: MessageType.Info,
+    message: '',
+    displayMessage: false,
+  } as MessageProps),
 
   withHandlers({
-    handleSubmit: ({urlInput, idInput, setSecretId, setDisplayMessage, setMessage, setMessageType}) => async () => {
+    handleSubmit: ({urlInput, idInput, setSecretId, setMessage}) => async () => {
       try {
         const response = await createWebhook(idInput, urlInput) as any
         const { id, message } = await response.json()
-
-        setMessage(message)
-        setMessageType(getMessageTypeFromHttpStatus(response.status))
-        setDisplayMessage(true)
+        setMessage({
+          messageType: getMessageTypeFromHttpStatus(response.status),
+          message: message,
+          displayMessage: true,
+        })
         setSecretId(id)
       } catch (error) {
-        setMessage(error.message)
-        setMessageType(TypeOfMessage.Danger)
-        setDisplayMessage(true)
+        setMessage({
+          messageType: MessageType.Danger,
+          message: error.message,
+          displayMessage: true,
+        })
       }
     }
   })
@@ -46,9 +51,7 @@ type Props = {
   inputIdPlaceholder: string,
   buttonName: string,
   secretId: string,
-  displayMessage: boolean,
-  message: string
-  messageType: TypeOfMessage,
+  message: MessageProps,
 }
 
 export const _Create = ({
@@ -59,15 +62,13 @@ export const _Create = ({
   inputIdPlaceholder,
   buttonName,
   secretId,
-  displayMessage,
   message,
-  messageType,
 }: Props) =>
   <div>
-    {displayMessage && 
+    {message.displayMessage && 
       <Message 
-        messageType={messageType} 
-        message={message} 
+        messageType={message.messageType} 
+        message={message.message} 
       />
     }
     <Input 

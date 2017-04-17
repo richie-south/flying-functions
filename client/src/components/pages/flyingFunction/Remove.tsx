@@ -2,7 +2,7 @@ import * as React from 'react'
 import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
 import {compose, withHandlers, withState, defaultProps} from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
-import { TypeOfMessage, getMessageTypeFromHttpStatus } from '../../Message';
+import { MessageType, MessageProps, getMessageTypeFromHttpStatus } from '../../Message';
 
 const enhance: any = compose(
   defaultProps({
@@ -10,22 +10,27 @@ const enhance: any = compose(
     buttonName: 'Remove function',
   }),
   withState('inputValue', 'handleInputValue', ''),
-  withState('displayMessage', 'setDisplayMessage', false),
-  withState('message', 'setMessage', ''),
-  withState('messageType', 'setMessageType', TypeOfMessage),
+  withState('message', 'setMessage', {
+    messageType: MessageType.Info,
+    message: '',
+    displayMessage: false,
+  } as MessageProps),
   withHandlers({
-    handleClick: ({inputValue, setMessage, setMessageType, setDisplayMessage}) => async () => {
+    handleClick: ({inputValue, setMessage}) => async () => {
       try {
         const response = await deleteFlyingFunction(inputValue)  
         const { id, message } = await response.json()
-
-        setMessage(message)
-        setMessageType(getMessageTypeFromHttpStatus(response.status))
-        setDisplayMessage(true)
+        setMessage({
+          messageType: getMessageTypeFromHttpStatus(response.status),
+          message: message,
+          displayMessage: true,
+        })
       } catch (error) {
-        setMessage(error.message)
-        setMessageType(TypeOfMessage.Danger)
-        setDisplayMessage(true)
+        setMessage({
+          messageType: MessageType.Danger,
+          message: error.message,
+          displayMessage: true,
+        })
       }
   },
   })

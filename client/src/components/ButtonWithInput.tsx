@@ -1,16 +1,14 @@
 import * as React from 'react'
 import { _Button as Button } from './Button'
 import { _Input as Input } from './Input'
-import { Message, TypeOfMessage } from './Message';
+import { Message, MessageProps, MessageType } from './Message';
 
 type Props = {
   handleInputValue: Function,
   handleClick: Function,
   inputPlaceholder: string,
   buttonName: string,
-  messageType: TypeOfMessage,
-  message: string,
-  displayMessage: boolean,
+  message: MessageProps,
 }
 
 export const ButtonWithInput = ({
@@ -18,15 +16,13 @@ export const ButtonWithInput = ({
   handleClick,
   inputPlaceholder,
   buttonName,
-  messageType,
   message,
-  displayMessage,
 }: Props) =>
   <div>
-    {displayMessage && 
+    {message.displayMessage && 
       <Message 
-        messageType={messageType} 
-        message={message} 
+        messageType={message.messageType} 
+        message={message.message} 
       />
     }
     <Input
