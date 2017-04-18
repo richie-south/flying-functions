@@ -3,28 +3,28 @@ import { Link } from 'react-router-dom'
 import { Nav as BNav, NavItem } from 'reactstrap';
 import { NavLink } from '../../CustomLink';
 
-export const Nav =({ match }) => 
+export const Nav = ({ match }) =>
   <BNav>
     <NavItem>
-      <NavLink 
+      <NavLink
         children={'Create'}
         to={`${match.url}/create`}
       />
     </NavItem>
     <NavItem>
-      <NavLink 
+      <NavLink
         children={'View'}
         to={`${match.url}/view`}
       />
     </NavItem>
     <NavItem>
-      <NavLink 
+      <NavLink
         children={'Update'}
         to={`${match.url}/update`}
       />
     </NavItem>
     <NavItem>
-      <NavLink 
+      <NavLink
         children={'Delete'}
         to={`${match.url}/delete`}
       />

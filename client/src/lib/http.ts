@@ -2,26 +2,26 @@ import 'isomorphic-fetch'
 
 const getHeaders = () => ({
   'Accept': 'application/json',
-  'Content-Type': 'application/json' 
+  'Content-Type': 'application/json'
 })
 
-export const post = (url: string, body: object) => 
+export const post = (url: string, body: object) =>
   fetch(url, {
     method: 'POST',
     headers: getHeaders(),
     body: JSON.stringify(body)
   })
 
-export const get = (url: string) => 
+export const get = (url: string) =>
   fetch(url)
 
-export const doDelete = (url: string) => 
+export const doDelete = (url: string) =>
   fetch(url, {
     method: 'DELETE',
     headers: getHeaders(),
   })
 
-export const put = (url: string, body: object) => 
+export const put = (url: string, body: object) =>
   fetch(url, {
     method: 'put',
     headers: getHeaders(),

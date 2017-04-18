@@ -5,16 +5,16 @@ import { Nav } from './nav'
 import { Route, Link, Redirect, Switch } from 'react-router-dom'
 import { Container } from '../../Container'
 
-export const Webhooks = ({ match, activeOnlyWhenExact }) => 
+export const Webhooks = ({ match, activeOnlyWhenExact }) =>
   <Container>
-    <Nav match={match}/>
+    <Nav match={match} />
 
     <Switch>
-      <Route path={`${match.url}/create`} component={Create}/>
-      <Route path={`${match.url}/delete`} component={Remove}/>
+      <Route path={`${match.url}/create`} component={Create} />
+      <Route path={`${match.url}/delete`} component={Remove} />
 
       <Route render={(props) => (
-        <Redirect to={`${match.url}/create`}/>
-      )}/>
+        <Redirect to={`${match.url}/create`} />
+      )} />
     </Switch>
   </Container>
