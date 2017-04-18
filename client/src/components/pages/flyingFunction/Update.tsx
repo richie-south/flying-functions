@@ -1,13 +1,11 @@
 import * as React from 'react'
 import { viewFlyingFunction, updateFlyingFunction } from '../../../lib/dal/flyingFunction'
 import { compose, withHandlers, withState, defaultProps } from 'recompose'
-import { ButtonWithInput } from '../../ButtonWithInput';
-import { _Button as Button } from '../../Button';
-import { saveFlyingFunction } from '../../../lib/action-creators/flying-function';
-import { Editor } from '../../Editor'
+import { ButtonWithInput } from '../../ButtonWithInput'
+import { _Button as Button } from '../../Button'
+import { _Editor as Editor } from '../../Editor'
 import { store } from '../../../lib/store'
-import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
-import { flyingFunction } from '../../../lib/reducers/flying-function';
+import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert'
 
 const enhance: any = compose(
   defaultProps({
@@ -16,7 +14,8 @@ const enhance: any = compose(
     buttonSaveName: 'Save',
   }),
   withState('inputValue', 'handleInputValue', ''),
-  withState('editorValue', 'handleEditorValue', ''),
+  withState('editorValue', 'handleEditorChange', ''),
+  withState('flyingId', 'setFlyingId', ''),
   withState('alertProps', 'setAlert', {
     type: AlertType.Info,
     message: '',
@@ -24,12 +23,9 @@ const enhance: any = compose(
   } as AlertProps),
 
   withHandlers({
-    handleChange: () => code => saveFlyingFunction(store.dispatch, code),
-    sendFlyingFunctionUpdate: ({ inputValue, setAlert, handleEditorValue }) => async () => {
-      const { flyingFunction }: any = store.getState()
-      handleEditorValue(flyingFunction)
+    sendFlyingFunctionUpdate: ({ editorValue, flyingId, setAlert }) => async () => {
       try {
-        const response = await updateFlyingFunction(inputValue, flyingFunction)  
+        const response = await updateFlyingFunction(flyingId, editorValue)
         const { message } = await response.json()
         setAlert({
           type: getAlertTypeFromHttpStatus(response.status),
@@ -43,21 +39,21 @@ const enhance: any = compose(
           display: true,
         })
       }
-      
     },
 
-    getFlyingFunctionData: ({ inputValue, handleEditorValue, setAlert }) => async () => {
+    getFlyingFunctionData: ({ inputValue, editorValue, setAlert, handleEditorChange, setFlyingId }) => async () => {
       try {
         const response = await viewFlyingFunction(inputValue)
         const data = await response.json()
-        if(!data.hasOwnProperty('code')){
+        const { originalCode, message, secretId } = data
+        if (!data.hasOwnProperty('code')) {
           throw new Error('You need to enter valid flying function id')
         }
-        handleEditorValue(data.originalCode)
-
+        handleEditorChange(originalCode)
+        setFlyingId(secretId)
         setAlert({
           type: getAlertTypeFromHttpStatus(response.status),
-          message: data.message,
+          message,
           display: true,
         })
       } catch (error) {
@@ -73,7 +69,7 @@ const enhance: any = compose(
 
 type Props = {
   getFlyingFunctionData: Function,
-  handleChange: Function,
+  handleEditorChange: Function,
   sendFlyingFunctionUpdate: Function,
   handleInputValue: Function,
   inputPlaceholder: string,
@@ -87,24 +83,23 @@ export const _Update = ({
   getFlyingFunctionData,
   sendFlyingFunctionUpdate,
   handleInputValue,
-  handleChange,
+  handleEditorChange,
   inputPlaceholder,
   buttonName,
   editorValue,
   buttonSaveName,
   alertProps,
-}: Props) => 
+}: Props) =>
   <div>
     <ButtonWithInput
       alertProps={alertProps}
       inputPlaceholder={inputPlaceholder}
       buttonName={buttonName}
-      handleInputValue={value =>  handleInputValue(value)}
+      handleInputValue={value => handleInputValue(value)}
       handleClick={() => getFlyingFunctionData()}
     />
-
     <Editor
-      handleChange={handleChange}
+      handleChange={handleEditorChange}
       defaultValue={''}
       value={editorValue}
     />
@@ -113,6 +108,5 @@ export const _Update = ({
       name={buttonSaveName}
     />
   </div>
-
 
 export const Update = enhance(_Update)

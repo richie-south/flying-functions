@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { deleteWebhook } from '../../../lib/dal/webhook'
-import {compose, withHandlers, withState, defaultProps} from 'recompose'
+import { compose, withHandlers, withState, defaultProps } from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
 import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
 
@@ -17,9 +17,9 @@ const enhance: any = compose(
     display: false,
   } as AlertProps),
   withHandlers({
-    handleClick: ({inputValue, setAlert}) => async () => {
+    handleClick: ({ inputValue, setAlert }) => async () => {
       try {
-        const response = await deleteWebhook(inputValue)  
+        const response = await deleteWebhook(inputValue)
         const { id, message } = await response.json()
         setAlert({
           type: getAlertTypeFromHttpStatus(response.status),
@@ -33,7 +33,7 @@ const enhance: any = compose(
           display: true,
         })
       }
-      
+
     },
   })
 )

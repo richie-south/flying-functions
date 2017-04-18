@@ -1,25 +1,24 @@
 import * as React from 'react'
-import {store} from '../lib/store'
-import {connect} from 'react-redux'
+import { store } from '../lib/store'
+import { connect } from 'react-redux'
 import { ListGroup, ListGroupItem } from 'reactstrap'
-import {compose, lifecycle, shouldUpdate, withHandlers, withState} from 'recompose'
-import { saveFlyingFunctionName } from '../lib/action-creators/flying-function-name'
+import { compose, lifecycle, shouldUpdate, withHandlers, withState } from 'recompose'
 
 const enhance: any = compose(
   connect(
     ({
-      flyingFunctionResponse:{
+      flyingFunctionResponse: {
+        invocationUrl,
+      secretId,
+      name,
+      urlId,
+      }
+    }) => ({
         invocationUrl,
         secretId,
         name,
-        urlId,
-      }
-    }) => ({
-      invocationUrl,
-      secretId,
-      name,
-      urlId
-    })
+        urlId
+      })
   )
 )
 
@@ -51,7 +50,7 @@ export const _List = ({
     <ListGroupItem><b>SecretId:</b> {secretId}</ListGroupItem>
     <ListGroupItem><b>UrlId:</b> {urlId}</ListGroupItem>
     <ListGroupItem><b>Name:</b> {name}</ListGroupItem>
-    {invocations !== 0 && <ListGroupItem><b>Invocations:</b> {invocations === -1 ? 0 : invocations }</ListGroupItem>}
+    {invocations !== 0 && <ListGroupItem><b>Invocations:</b> {invocations === -1 ? 0 : invocations}</ListGroupItem>}
     {createdAt && <ListGroupItem><b>CreatedAt:</b> {createdAt}</ListGroupItem>}
     {updatedAt && <ListGroupItem><b>UpdatedAt:</b> {updatedAt}</ListGroupItem>}
     {code && <ListGroupItem><b>Transformed code:</b> <pre>{code}</pre></ListGroupItem>}

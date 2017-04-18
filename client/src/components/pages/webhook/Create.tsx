@@ -22,7 +22,7 @@ const enhance: any = compose(
   } as AlertProps),
 
   withHandlers({
-    handleSubmit: ({urlInput, idInput, setSecretId, setAlert}) => async () => {
+    handleSubmit: ({ urlInput, idInput, setSecretId, setAlert }) => async () => {
       try {
         const response = await createWebhook(idInput, urlInput) as any
         const { id, message } = await response.json()
@@ -65,16 +65,16 @@ export const _Create = ({
   alertProps,
 }: Props) =>
   <div>
-    <Alert 
+    <Alert
       type={alertProps.type}
-      message={alertProps.message} 
+      message={alertProps.message}
       display={alertProps.display}
     />
-    <Input 
+    <Input
       placeholder={inputUrlPlaceholder}
       handleChange={value => handleUrlInput(value)}
     />
-    <Input 
+    <Input
       placeholder={inputIdPlaceholder}
       handleChange={value => handleIdInput(value)}
     />
@@ -83,8 +83,8 @@ export const _Create = ({
       handleClick={() => handleSubmit()}
     />
     <ListGroup>
-    {secretId && <ListGroupItem>SecretId: {secretId}</ListGroupItem>}
-  </ListGroup>
+      {secretId && <ListGroupItem>SecretId: {secretId}</ListGroupItem>}
+    </ListGroup>
   </div>
 
 export const Create = enhance(_Create)
