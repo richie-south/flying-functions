@@ -1,13 +1,6 @@
-import {Action, createActions} from 'redux-decorated'
-import { flyingFunction } from './reducers/flying-function';
+import { Action, createActions } from 'redux-decorated'
 
-export const actions = createActions({
-  HTTPMethod: {},
-  sendFlyingFunction: {},
-  saveFlyingFunction: {},
-  flyingFunctionResponse: {},
-  flyingFunctionName: {},
-})
+export const actions = createActions({})
 
 export const action = (action, payload) => ({
   type: action.type,
