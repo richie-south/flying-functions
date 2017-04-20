@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose')
 const shortid = require('shortid')
+const utils = require('./utils')
 
 const CodeStorageSchema = mongoose.Schema({
   
@@ -25,6 +26,11 @@ const CodeStorageSchema = mongoose.Schema({
     required: [true, 'Original code must be saved']
   },
 
+  HTTPType: {
+    type: String,
+    required: [true, 'HTTPType is requred']
+  },
+
   invocations: {
     type: Number,
     default: 0,
@@ -36,6 +42,10 @@ const CodeStorageSchema = mongoose.Schema({
 
 CodeStorageSchema.pre('save', function(next) {
   
+  if(!utils.availableFlyingFunctionHTTPTypes.includes(this.HTTPType)){
+    return next(new Error('Unsupported http type'))
+  }
+
   /**
    * checks if urlId is used before
    * re-runs until uniq urlId

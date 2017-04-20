@@ -2,8 +2,8 @@
 
 const CodeStorage = require('../model/CodeStorage')
 
-const create = (code, originalCode, name, invocations = 0) => 
-  new CodeStorage({ code, originalCode, name, invocations, urlId: '00' }).save()
+const create = (code, originalCode, name, HTTPType = 'GET', invocations = 0) => 
+  new CodeStorage({ code, originalCode, name, HTTPType, invocations, urlId: '00' }).save()
 
 const getById = (_id) => 
   CodeStorage.findOne({ _id })

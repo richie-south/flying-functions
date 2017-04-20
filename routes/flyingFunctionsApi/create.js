@@ -6,11 +6,11 @@ const codeStorageHandler = require('../../dal/codeStorageHandler')
 const mongooseErrors = require('../../lib/customErrors/mongooseErrors')
 
 const create = async (req, res) => {
-  const { code, name } = req.body
+  const { code, name, HTTPType } = req.body
 
   try {
     const transformedCode = codeTransformer(code)
-    const { _id, urlId } = await codeStorageHandler.create(transformedCode, code, name)
+    const { _id, urlId } = await codeStorageHandler.create(transformedCode, code, name, HTTPType)
 
     res.status(200).json({
       message: 'Flying function created!',
