@@ -5,9 +5,11 @@ const baseUrl = 'https://richardsoderman.se/projectflying'
 const flying = 'flying'
 
 export const createFlyingFunction = ({ code, name }) =>
+export const createFlyingFunction = ({ code, name, HTTPType }) =>
   post(`${baseUrl}/${flying}`, {
     code,
     name,
+    HTTPType,
   })
 
 export const deleteFlyingFunction = (id: string) =>
