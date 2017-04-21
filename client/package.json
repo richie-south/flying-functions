@@ -8,7 +8,7 @@
   "scripts": {
     "start": "tscomp start",
     "build": "tscomp build",
-    "deploy": "gh-pages -d ../docs",
+    "deploy": "gh-pages -d ../.build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
