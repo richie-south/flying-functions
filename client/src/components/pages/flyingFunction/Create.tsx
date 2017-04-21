@@ -3,19 +3,27 @@ import { _Editor as Editor } from '../../Editor'
 import { _Button as Button } from '../../Button'
 import { _Input as Input } from '../../Input'
 import { _List as List, Props as ListProps } from '../../FlyingFunctionInfoList';
-import { compose, defaultProps, withHandlers, withState } from 'recompose';
-import { standard } from '../../../template/code';
-import { createFlyingFunction } from '../../../lib/dal/flyingFunction';
-import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
+import { compose, defaultProps, withHandlers, withState } from 'recompose'
+import { standard } from '../../../template/code'
+import { createFlyingFunction } from '../../../lib/dal/flyingFunction'
+import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert'
+import {RadioSelector} from '../../RadioSelector'
+
+const HTTPType = (type: string) => (fn: Function) => fn(type)
 
 const enhance: any = compose(
   defaultProps({
     defaultValue: standard,
     buttonName: 'Create flying function',
     inputPlaceholder: 'Enter function name',
+    radioItems: [
+      {text: 'GET'},
+      {text: 'POST'}
+    ],
   }),
   withState('editorValue', 'handleEditorChange', standard),
   withState('inputValue', 'handleInputValue', ''),
+  withState('httpType', 'setHTTPType', ''),
   withState('listValues', 'handleListValues', {
     code: '',
     originalCode: '',
@@ -26,7 +34,7 @@ const enhance: any = compose(
     display: false,
   } as AlertProps),
   withHandlers({
-    handleButtonClick: ({ editorValue, inputValue, handleListValues, setAlert }) => async () => {
+    handleButtonClick: ({ httpType, editorValue, inputValue, handleListValues, setAlert }) => async () => {
       if (inputValue.trim() === '') {
         setAlert({
           type: AlertType.Warning,
@@ -35,8 +43,18 @@ const enhance: any = compose(
         })
         return
       }
+
+      if(httpType.trim() === ''){
+        setAlert({
+          type: AlertType.Warning,
+          message: 'Select an http type',
+          display: true,
+        })
+        return
+      }
+
       try {
-        const response = await createFlyingFunction({ code: editorValue, name: inputValue } as any)
+        const response = await createFlyingFunction({ code: editorValue, name: inputValue, HTTPType: httpType } as any)
         const responseData = await response.json() as any
         handleListValues(responseData)
 
@@ -66,6 +84,8 @@ type Props = {
   editorValue: string,
   listValues: ListProps,
   alertProps: AlertProps,
+  setHTTPType: (httpType: string) => string,
+  radioItems: any,
 }
 
 const _Create = ({
@@ -78,6 +98,8 @@ const _Create = ({
   editorValue,
   listValues,
   alertProps,
+  setHTTPType,
+  radioItems,
 }: Props) =>
   <div>
     <Alert
@@ -93,6 +115,12 @@ const _Create = ({
       handleChange={handleEditorChange}
       defaultValue={defaultValue}
       value={editorValue}
+    />
+    <RadioSelector
+      groupName={'HTTPTypeSelector'}
+      title={'HTTP type'}
+      itemClick={setHTTPType}
+      items={radioItems}
     />
     <Button
       name={buttonName}
