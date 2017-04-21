@@ -4,7 +4,6 @@ const baseUrl = 'https://richardsoderman.se/projectflying'
 //const baseUrl = 'http://localhost:5001'
 const flying = 'flying'
 
-export const createFlyingFunction = ({ code, name }) =>
 export const createFlyingFunction = ({ code, name, HTTPType }) =>
   post(`${baseUrl}/${flying}`, {
     code,
