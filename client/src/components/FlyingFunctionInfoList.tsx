@@ -29,7 +29,7 @@ export type Props = {
   urlId: string,
   code?: string,
   originalCode?: string,
-  invocations?: number,
+  invocations?: string,
   createdAt?: string,
   updatedAt?: string,
 }
@@ -50,7 +50,7 @@ export const _List = ({
     <ListGroupItem><b>SecretId:</b> {secretId}</ListGroupItem>
     <ListGroupItem><b>UrlId:</b> {urlId}</ListGroupItem>
     <ListGroupItem><b>Name:</b> {name}</ListGroupItem>
-    {invocations !== 0 && <ListGroupItem><b>Invocations:</b> {invocations === -1 ? 0 : invocations}</ListGroupItem>}
+    {invocations && <ListGroupItem><b>Invocations:</b> {invocations}</ListGroupItem>}
     {createdAt && <ListGroupItem><b>CreatedAt:</b> {createdAt}</ListGroupItem>}
     {updatedAt && <ListGroupItem><b>UpdatedAt:</b> {updatedAt}</ListGroupItem>}
     {code && <ListGroupItem><b>Transformed code:</b> <pre>{code}</pre></ListGroupItem>}

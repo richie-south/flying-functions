@@ -16,7 +16,7 @@ const enhance: any = compose(
   withState('listValues', 'handleListValues', {
     code: ' ',
     originalCode: ' ',
-    invocations: -1,
+    invocations: ' ',
     createdAt: ' ',
     updatedAt: ' ',
   }),
