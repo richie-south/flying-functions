@@ -13,10 +13,10 @@ const runCode = require('../../lib/runCode')
   const { 
     selfUrl,
     flyingFunctionData: {
-      code, 
-      type, 
-      invocations, 
-      name, 
+      code,
+      type,
+      invocations,
+      name,
       _id,
       urlId,
     },
