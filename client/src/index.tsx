@@ -5,6 +5,7 @@ import { App } from './App'
 import { Provider } from 'react-redux'
 import {store} from './lib/store'
 import 'bootstrap/dist/css/bootstrap.css'
+import './scss/header.scss'
 
 function renderApp(App) {
   const app = document.getElementById('app')
