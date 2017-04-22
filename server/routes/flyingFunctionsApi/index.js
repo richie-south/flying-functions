@@ -4,6 +4,7 @@ const router = require('express').Router()
 const createSelfUrl = require('../../lib/middleware/createSelfUrl')
 const getFlyingFunctionData = require('../../lib/middleware/getFlyingFunctionData')
 const checkHttpType = require('../../lib/middleware/checkHttpType')
+const updateInvocations = require('../../lib/middleware/updateInvocations')
 const run = require('./run')
 const update = require('./update')
 const create = require('./create')
@@ -24,8 +25,8 @@ router
   /**
    * Run: flying function
    */
-  .get('/:id/:name', getFlyingFunctionData.ByUrlId, checkHttpType, createSelfUrl, run)
-  .post('/:id/:name', getFlyingFunctionData.ByUrlId, checkHttpType, createSelfUrl, run)
+  .get('/:id/:name', getFlyingFunctionData.ByUrlId, checkHttpType, createSelfUrl, updateInvocations, run)
+  .post('/:id/:name', getFlyingFunctionData.ByUrlId, checkHttpType, createSelfUrl, updateInvocations, run)
   /**
    * Create: flying function
    */

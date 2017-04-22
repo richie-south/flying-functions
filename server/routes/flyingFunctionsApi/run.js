@@ -14,17 +14,14 @@ const runCode = require('../../lib/runCode')
     selfUrl,
     flyingFunctionData: {
       code,
-      type,
       invocations,
-      name,
+      currentInvocation,
       _id,
       urlId,
     },
   } = res.locals
 
   try {
-    const currentInvocation = invocations + 1
-    await codeStorageHandler.updateInvocations(_id, currentInvocation)
     const invocationValue = await runCode(code, codeParams, currentInvocation, id)
 
     const payload = {
