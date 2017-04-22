@@ -2,8 +2,10 @@
 
 const checkHttpType = (req, res, next) => {
   const { 
-    HTTPType,
-  } = res.locals.flyingFunctionData
+    flyingFunctionData: {
+      HTTPType,
+    },
+  } = res.locals
   
   if(req.method != HTTPType){
     return res.status(400).json({message: 'Wrong http type'})
