@@ -128,6 +128,7 @@ Responce:
   "secretId": "SECRET ID TO REMOVE/UPDATE/VIEW",
   "name": "NAME OF FLYING FUNCTION",
   "code": "CODE FOR FLYING FUNCTION",
+  "HTTPType": "HTTP REQUEST TYPE FOR YOUR FLYING FUNCTION", 
   "invocations": "NUMBER OF INVOCATIONS FOR FLYING FUNCTION",
   "createdAt": "TIME OF CREATION",
   "updatedAt": "TIME OF LATEST UPDATE",
@@ -166,7 +167,8 @@ Send json object to create flying function
 ```json
 {
   "name": "YOUR FLYING FUNCTION NAME",
-  "code": "CODE FOR FLYING FUNCTION"
+  "code": "CODE FOR FLYING FUNCTION",
+  "HTTPType":  "HTTP REQUEST TYPE FOR YOUR FLYING FUNCTION"
 }
 ```  
 Responce:  
@@ -175,7 +177,8 @@ Responce:
   "invocationUrl": "URL TO INVOC FLYING FUNCTION",
   "urlId": "ID ONLY USED TO INVOC FLYING FUNCTION",
   "secretId": "SECRET ID TO REMOVE/UPDATE/VIEW",
-  "name": "NAME OF FLYING FUNCTION"
+  "name": "NAME OF FLYING FUNCTION",
+  "HTTPType": "HTTP REQUEST TYPE FOR YOUR FLYING FUNCTION"
 }
 ```
 
@@ -194,7 +197,7 @@ Responce:
 }
 ```
 
-**DELETE - /flying/:id**  
+**DELETE - /flying/:secretId**  
 *removes flying function*  
 
 Responce:  
