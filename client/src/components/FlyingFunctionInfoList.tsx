@@ -30,6 +30,7 @@ export type Props = {
   code?: string,
   originalCode?: string,
   invocations?: string,
+  HTTPType?: string,
   createdAt?: string,
   updatedAt?: string,
 }
@@ -42,6 +43,7 @@ export const _List = ({
   code,
   originalCode,
   invocations,
+  HTTPType,
   createdAt,
   updatedAt,
 }: Props) =>
@@ -51,6 +53,7 @@ export const _List = ({
     <ListGroupItem><b>UrlId:</b> {urlId}</ListGroupItem>
     <ListGroupItem><b>Name:</b> {name}</ListGroupItem>
     {invocations && <ListGroupItem><b>Invocations:</b> {invocations}</ListGroupItem>}
+    {HTTPType && <ListGroupItem><b>HTTP Type:</b> {HTTPType}</ListGroupItem>}
     {createdAt && <ListGroupItem><b>CreatedAt:</b> {createdAt}</ListGroupItem>}
     {updatedAt && <ListGroupItem><b>UpdatedAt:</b> {updatedAt}</ListGroupItem>}
     {code && <ListGroupItem><b>Transformed code:</b> <pre>{code}</pre></ListGroupItem>}
