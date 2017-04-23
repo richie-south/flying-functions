@@ -4,7 +4,7 @@ require('isomorphic-fetch')
 const _eval = require('eval')
 const invocationHookHandler = require('../dal/invocationHookHandler')
 const codeStorageHandler = require('../dal/codeStorageHandler')
-const flyingStorageHandler = require('../dal/flyingStorageHandler')
+const storageHandler = require('../dal/flyingStorageHandler')
 
 const globals = {
   console,
@@ -17,7 +17,7 @@ const globals = {
   fetch,
 
   // own
-  flyingStorageHandler,
+  storageHandler,
 }
 
 const runCode = async (code, args, currentInvocation, flyingId) => 
