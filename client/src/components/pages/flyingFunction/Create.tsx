@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
 import { _Editor as Editor } from '../../Editor'
 import { _Button as Button } from '../../Button'
 import { _Input as Input } from '../../Input'
@@ -7,11 +8,13 @@ import { compose, defaultProps, withHandlers, withState } from 'recompose'
 import { standard } from '../../../template/code'
 import { createFlyingFunction } from '../../../lib/dal/flyingFunction'
 import { Alert, AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert'
-import {RadioSelector} from '../../RadioSelector'
+import { RadioSelector } from '../../RadioSelector'
+import { storeFlyingFunction } from '../../../lib/action-creators/flyingFunction'
 
 const HTTPType = (type: string) => (fn: Function) => fn(type)
 
 const enhance: any = compose(
+  connect(state => ({ dispatch: state.dispatch })),
   defaultProps({
     defaultValue: standard,
     buttonName: 'Create flying function',
@@ -34,7 +37,7 @@ const enhance: any = compose(
     display: false,
   } as AlertProps),
   withHandlers({
-    handleButtonClick: ({ httpType, editorValue, inputValue, handleListValues, setAlert }) => async () => {
+    handleButtonClick: ({ dispatch, httpType, editorValue, inputValue, handleListValues, setAlert }) => async () => {
       if (inputValue.trim() === '') {
         setAlert({
           type: AlertType.Warning,
@@ -54,8 +57,10 @@ const enhance: any = compose(
       }
 
       try {
-        const response = await createFlyingFunction({ code: editorValue, name: inputValue, HTTPType: httpType } as any)
+        const flyingFunction = { code: editorValue, name: inputValue, HTTPType: httpType } as any
+        const response = await createFlyingFunction(flyingFunction)
         const responseData = await response.json() as any
+        const { secretId, urlId, invocationUrl, HTTPType } = responseData
         handleListValues(responseData)
 
         setAlert({
@@ -63,6 +68,14 @@ const enhance: any = compose(
           message: responseData.message,
           display: true,
         })
+
+        storeFlyingFunction(dispatch, 
+          Object.assign({}, flyingFunction, {
+            secretId, 
+            urlId, 
+            invocationUrl,
+            HTTPType,
+          }))
       } catch (error) {
         setAlert({
           type: AlertType.Danger,
