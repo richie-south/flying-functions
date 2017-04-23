@@ -18,6 +18,7 @@ const create = async (req, res) => {
       secretId: _id,
       urlId,
       name,
+      HTTPType,
     })
   } catch (error) {
     if(mongooseErrors.isValidatorError(error)){
