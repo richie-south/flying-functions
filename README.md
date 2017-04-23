@@ -58,9 +58,9 @@ these globals are accessible from your flying function
 
 # Persistent Storage
 
-## Overview
-
 use the global `storageHandler` to manipulate data  
+
+## Overview
 
 * [create](#create)
 * [getById](#getbyid)
