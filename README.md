@@ -3,44 +3,40 @@ Your functions in the cloud with rest api
 
 <img src="https://raw.githubusercontent.com/richie-south/flying-functions/master/ff.png" width="200">  
 
-# TODO
+# Installation  
 
-## general
-- Code cleanup
+```
+ TODO  
+```
 
-## doc  
-- Update Persistent Storage doc
+# Usage  
 
-## client
-- Validation messages
-- Add button to show available globals and examples 
-- Localstorage for previously create flying functions and webhooks.
+## Summary  
 
-## server  
-- Add more globals
-- Add better api error messages
+* [Basic how to](#basic-how-to)
+* [Globals](#globals)
+* [Persistent Storage](#persistent-storage)
+* [Api](#api)
+* [Flying function Api](#flying-functions-api)
+* [Webhook Api](#webhook-api)
+* [Todo](#todo)
 
-# How to
 
-**Function**  
-write your function like this.
+# Basic how to
+
+ 1. write your function like this.
 ```javascript
-/*
- * @param data [express req.query (GET) or express req.data (POST)]
- * @param currentInvocation [nr of times function has been invocated]
- * @param flyingId [uniq id for flying function, same as uniq id in url]
- */
 module.exports = async (data, currentInvocation, flyingId) => {
-  // your code here
-  return 10;
+  // your code here 
+
+  // example
+  return 10; 
 };
 ```
-post it to flying functions like example in API bellow.
-
-
-**Resppnse**  
-Response from server executing function above.
-```json
+ 2. post it to flying functions like example in API bellow.
+ 3. execute url from response.
+ 4. Response from server executing function above.
+```json 
 {
   "result": 10,
   "invocations": 1,
@@ -48,8 +44,9 @@ Response from server executing function above.
 }
 ```
 
-# Globals
-accessible from your flying function  
+# Globals  
+
+these globals are accessible from your flying function  
 
 - console
 - Number
@@ -57,31 +54,112 @@ accessible from your flying function
 - Promise
 - setTimeout
 - fetch | `isomorphic-fetch` from npm
-- flyingStorageHandler | Persistent storage handler
+- storageHandler | Persistent storage handler
 
 # Persistent Storage
-use the global `flyingStorageHandler` to save/update/view/remove data 
 
-**flyingStorageHandler functions**  
-- name: create
-  - param: collectionId
-  - param: data
-  - returns: object
-- name: getById
-  - param: id
-  - returns: object
-- name: getByCollectionId
-  - param: collectionId
-  - returns: array
-- name: updateDataById
-  - param: id
-  - param data
-  - returns: object
-- name: remove
-  - param: id
-  - returns: object
+## Overview
 
-**example**
+use the global `storageHandler` to manipulate data  
+
+* [create](#create)
+* [getById](#getbyid)
+* [getByCollectionId](#getbycollectionid)
+* [updateDataById](#updatedatabyid)
+* [remove](#remove)
+* [example](#example)
+
+## create  
+
+### Syntax  
+
+```javascript
+const result = await storageHandler.create(collectionId, dataToStore)
+```
+
+### Parameters
+
+- collectionId: string
+  - used to store your data under a shared id so you can retirve large collections of that data.
+- dataToStore: object
+  - the data you want to store.  
+
+### Return value
+
+Object stored in the database
+
+## getById  
+
+### Syntax  
+
+```javascript
+const result = await storageHandler.getById(id)
+```
+
+### Parameters
+
+- id: string
+  - Id for specific resource.  
+
+### Return value
+
+Object stored in the database
+
+## getByCollectionId
+
+### Syntax  
+
+```javascript
+const result = await storageHandler.getByCollectionId(id)
+```
+
+### Parameters
+
+- id: string
+  - Id of a collection id.  
+
+### Return value
+
+An Array of multible objects that are stored under the same collection id.
+
+## updateDataById
+
+### Syntax  
+
+```javascript
+const result = await storageHandler.updateDataById(id, data)
+```
+
+### Parameters
+
+- id: string
+  - Id of a specific resource.  
+- data: object
+  - object of data to be uppdated.
+
+### Return value
+
+Updated object that is stored in the database.
+
+## remove
+
+### Syntax  
+
+```javascript
+const result = await storageHandler.remove(id)
+```
+
+### Parameters
+
+- id: string
+  - Id of a specific resource
+
+### Return value
+
+Object confirming the removal.
+
+
+## example
 
 ```javascript
 module.exports = async (data currentInvocation, flyingId) => {
@@ -103,12 +181,11 @@ module.exports = async (data currentInvocation, flyingId) => {
 
   return storedData
 };
-```
-
+```  
 
 # API
 
-## flying functions
+## flying functions api
 
 **GET - /flying/**  
 *view all stored functions - dev only*  
@@ -207,7 +284,7 @@ Responce:
 }
 ```
 
-## Webhook
+## Webhook api
 
 **POST - /webhook/:urlId**  
 *creates a new webhook*  
@@ -232,3 +309,21 @@ Responce:
 {
   "message": "webhook removed!"
 }
+```
+
+# TODO
+
+## general
+- Code cleanup
+- Installation guide
+
+## doc  
+
+## client
+- Validation messages
+- Add button to show available globals and examples 
+- Localstorage for previously create flying functions and webhooks.
+
+## server  
+- Add more globals
+- Add better api error messages
