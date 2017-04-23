@@ -4,7 +4,6 @@ import { render } from 'react-dom'
 import { App } from './App'
 
 import 'bootstrap/dist/css/bootstrap.css'
-import './scss/header.scss'
 
 function renderApp(App) {
   const app = document.getElementById('app')
