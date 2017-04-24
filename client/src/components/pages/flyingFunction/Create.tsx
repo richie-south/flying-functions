@@ -69,13 +69,7 @@ const enhance: any = compose(
           display: true,
         })
 
-        storeFlyingFunction(dispatch, 
-          Object.assign({}, flyingFunction, {
-            secretId, 
-            urlId, 
-            invocationUrl,
-            HTTPType,
-          }))
+        storeFlyingFunction(dispatch, responseData)
       } catch (error) {
         setAlert({
           type: AlertType.Danger,
