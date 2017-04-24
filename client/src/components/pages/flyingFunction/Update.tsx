@@ -47,7 +47,7 @@ const enhance: any = compose(
         const data = await response.json()
         const { originalCode, message, secretId } = data
         if (!data.hasOwnProperty('code')) {
-          throw new Error('You need to enter valid flying function id')
+          throw new Error('Enter a valid flying function id')
         }
         handleEditorChange(originalCode)
         setFlyingId(secretId)

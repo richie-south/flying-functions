@@ -32,7 +32,7 @@ const enhance: any = compose(
         const data = await response.json()
 
         if (!data.hasOwnProperty('code')) {
-          throw new Error('You need to enter valid flying function id')
+          throw new Error('Enter a valid flying function id')
         }
 
         // quick fix
