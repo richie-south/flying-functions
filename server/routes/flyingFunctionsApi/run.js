@@ -9,7 +9,8 @@ const runCode = require('../../lib/runCode')
 
  const run = async (req, res) => {
   const codeParams = req.method === 'GET' ? req.query : req.body
-  const _requestOrigin = req.get('origin')
+  const _requestOrigin = req.headers.referer
+
   const { id } = req.params
   const { 
     selfUrl,
