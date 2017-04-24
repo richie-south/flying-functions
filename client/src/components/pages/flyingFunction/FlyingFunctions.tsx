@@ -13,7 +13,7 @@ export const FlyingFunctions = ({ match }) =>
   <Container>
     <Nav match={match} />
       <Row>
-        <Col>
+        <Col style={{ maxWidth: '630px' }}>
           <div style={{ maxWidth: '600px' }}>
           <Switch>
             <Route path={`${match.url}/create`} component={Create} />
