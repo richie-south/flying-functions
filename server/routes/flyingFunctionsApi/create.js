@@ -18,6 +18,8 @@ const create = async (req, res) => {
       secretId: _id,
       urlId,
       name,
+      code: transformedCode,
+      originalCode: code,
       HTTPType,
     })
   } catch (error) {
