@@ -35,14 +35,10 @@ const runCode = require('../../lib/runCode')
             HTTPType,
             urlId,
             secretId,
-            invocations
-          }
-
+            invocations: currentInvocation,
+          },
         },
-        codeParams, 
-        currentInvocation, 
-        id, 
-        _id
+        codeParams
       )
 
     const payload = {
