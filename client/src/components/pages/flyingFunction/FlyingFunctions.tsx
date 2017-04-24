@@ -6,22 +6,30 @@ import { Update } from './Update'
 import { Nav } from './nav'
 import { Route, Link, Redirect, Switch } from 'react-router-dom'
 import { Container } from '../../Container'
+import { Row, Col } from 'reactstrap'
+import {FlyingFunctionList} from '../../FlyingFunctionList'
 
 export const FlyingFunctions = ({ match }) =>
   <Container>
     <Nav match={match} />
+      <Row>
+        <Col>
+          <div style={{ maxWidth: '600px' }}>
+          <Switch>
+            <Route path={`${match.url}/create`} component={Create} />
+            <Route path={`${match.url}/view`} component={View} />
+            <Route path={`${match.url}/update`} component={Update} />
+            <Route path={`${match.url}/delete`} component={Remove} />
 
-    <Switch>
-      <Route path={`${match.url}/create`} component={Create} />
-      <Route path={`${match.url}/view`} component={View} />
-      <Route path={`${match.url}/update`} component={Update} />
-      <Route path={`${match.url}/delete`} component={Remove} />
+            <Route render={() => (
+              <Redirect to={`${match.url}/create`} />
+            )} />
+          </Switch>
+          </div>
+        </Col>
 
-      <Route render={() => (
-        <Redirect to={`${match.url}/create`} />
-      )} />
-    </Switch>
-
-
-
+        <Col >
+          <FlyingFunctionList />
+        </Col>
+      </Row>
   </Container>
