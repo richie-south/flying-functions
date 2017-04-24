@@ -10,6 +10,8 @@ const remove = async (req, res) => {
     await codeStorageHandler.remove(id)
 
     res.status(200).json({
+      secretId: id,
+      _id: id,
       message: 'Flying function removed',
     })
   } catch (error) {
