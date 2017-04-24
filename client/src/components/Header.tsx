@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import { Nav, NavItem, Navbar, NavbarBrand } from 'reactstrap'
-import { NavLink } from './CustomLink';
+import { NavLink } from './CustomLink'
 
 export const Header = ({ match }) =>
   <Navbar color="faded" light toggleable>
