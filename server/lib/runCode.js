@@ -20,7 +20,10 @@ const globals = {
   storageHandler,
 }
 
-const runCode = async (code, args, currentInvocation, flyingId) => 
-  await _eval(code, globals)(args, currentInvocation, flyingId)
+const runCode = async (code, _globals, args) => {
+  const myGlobals = Object.assign({}, globals, _globals)
+  await _eval(code, myGlobals)(args)
+}
+  
 
 module.exports = runCode
