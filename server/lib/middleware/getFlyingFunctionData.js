@@ -7,6 +7,12 @@ const getFlyingFunctionData = (fn) => async (req, res, next) => {
   const { id } = req.params
   
   try {
+
+    const result = await fn(id)
+    if(result === null){
+      throw new Error('Flying function not found')
+    }
+
     const { 
       _id, 
       urlId,
@@ -16,10 +22,11 @@ const getFlyingFunctionData = (fn) => async (req, res, next) => {
       originalCode,
       invocations, 
       createdAt, 
-      updatedAt 
-    } = await fn(id)
+      updatedAt,
+    } = result
+
     res.locals.flyingFunctionData = {
-      _id: _id,
+      _id,
       secretId: _id, 
       urlId,
       name, 
@@ -28,10 +35,10 @@ const getFlyingFunctionData = (fn) => async (req, res, next) => {
       originalCode,
       invocations, 
       createdAt, 
-      updatedAt 
+      updatedAt, 
     }
 
-    next()
+    return next()
   } catch (error) {
     if(mongooseErrors.isValidatorError(error)){
       return res.status(400).json({
