@@ -3,17 +3,12 @@ Your functions in the cloud with rest api
 
 <img src="https://raw.githubusercontent.com/richie-south/flying-functions/master/ff.png" width="200">  
 
-# Installation  
-
-```
- TODO  
-```
-
 # Usage  
 
 ## Summary  
 
 * [Basic how to](#basic-how-to)
+* [Flying function params](#flying-function-params)
 * [Globals](#globals)
 * [Persistent Storage](#persistent-storage)
 * [Api](#api)
@@ -26,7 +21,7 @@ Your functions in the cloud with rest api
 
  1. write your function like this.
 ```javascript
-module.exports = async (data, currentInvocation, flyingId) => {
+module.exports = async (data) => {
   // your code here 
 
   // example
@@ -44,6 +39,19 @@ module.exports = async (data, currentInvocation, flyingId) => {
 }
 ```
 
+# Flying function params
+
+### Syntax  
+
+```javascript
+module.exports = async (data) => {}
+```
+
+### Parameters
+
+  - data
+    - express req.query (GET) or express req.data (POST)
+
 # Globals  
 
 these globals are accessible from your flying function  
@@ -53,8 +61,20 @@ these globals are accessible from your flying function
 - Math
 - Promise
 - setTimeout
-- fetch | `isomorphic-fetch` from npm
-- storageHandler | Persistent storage handler
+- fetch 
+  - `isomorphic-fetch` from npm
+- storageHandler
+  - Persistent storage handler
+- _requestOrigin 
+  - What origin is the request from
+- _flyingFunctionData
+  - Object with data about your flying function, contains:
+    - name.
+    - urlId
+    - secretId
+    - invocations:
+      - nr of times function has been invocated (including current)
+    - HTTPType
 
 # Persistent Storage
 
@@ -315,13 +335,12 @@ Responce:
 
 ## general
 - Code cleanup
-- Installation guide
 
 ## doc  
 
 ## client
 - Validation messages
-- Add button to show available globals and examples 
+- Add button to show available globals and examples
 - Localstorage for previously create flying functions and webhooks.
 
 ## server  
