@@ -9,11 +9,15 @@ const runCode = require('../../lib/runCode')
 
  const run = async (req, res) => {
   const codeParams = req.method === 'GET' ? req.query : req.body
+  const _requestOrigin = req.get('origin')
   const { id } = req.params
   const { 
     selfUrl,
     flyingFunctionData: {
       code,
+      name,
+      HTTPType,
+      secretId,
       invocations,
       currentInvocation,
       _id,
@@ -22,10 +26,27 @@ const runCode = require('../../lib/runCode')
   } = res.locals
 
   try {
-    const invocationValue = await runCode(code, codeParams, currentInvocation, id)
+    const invocationValue = await runCode(
+        code, 
+        {
+          _requestOrigin,
+          _flyingFunctionData: {
+            name,
+            HTTPType,
+            urlId,
+            secretId,
+            invocations
+          }
+
+        },
+        codeParams, 
+        currentInvocation, 
+        id, 
+        _id
+      )
 
     const payload = {
-      result: invocationValue,
+      result: invocationValue ? invocationValue : null,
       invocations: currentInvocation,
       self: selfUrl,
     }
