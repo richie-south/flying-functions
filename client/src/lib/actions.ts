@@ -1,7 +1,8 @@
 import { Action, createActions } from 'redux-decorated'
 
 export const actions = createActions({
-  flyingFunctions: [],
+  storeFlyingFunction: {},
+  removeFlyingFunction: {},
 })
 
 export const action = (action, payload) => ({
