@@ -3,8 +3,11 @@ import { deleteFlyingFunction } from '../../../lib/dal/flyingFunction'
 import { compose, withHandlers, withState, defaultProps } from 'recompose'
 import { ButtonWithInput } from '../../ButtonWithInput';
 import { AlertType, AlertProps, getAlertTypeFromHttpStatus } from '../../Alert';
+import { removeFlyingFunction } from '../../../lib/action-creators/flyingFunction'
+import {connect} from 'react-redux'
 
 const enhance: any = compose(
+  connect(state => ({ dispatch: state.dispatch })),
   defaultProps({
     inputPlaceholder: 'Enter secretId',
     buttonName: 'Remove function',
@@ -16,7 +19,7 @@ const enhance: any = compose(
     display: false,
   } as AlertProps),
   withHandlers({
-    handleClick: ({ inputValue, setAlert }) => async () => {
+    handleClick: ({ dispatch, inputValue, setAlert }) => async () => {
       if (inputValue.trim() === '') {
         setAlert({
           type: AlertType.Warning,
@@ -27,7 +30,7 @@ const enhance: any = compose(
       }
       try {
         const response = await deleteFlyingFunction(inputValue)
-        const { id, message } = await response.json()
+        const { secretId, message } = await response.json()
         if (!message || message.length <= 0) {
           return
         }
@@ -36,6 +39,7 @@ const enhance: any = compose(
           message: message,
           display: true,
         })
+        removeFlyingFunction(dispatch, secretId)
       } catch (error) {
         setAlert({
           type: AlertType.Danger,
