@@ -22,7 +22,7 @@ const globals = {
 
 const runCode = async (code, _globals, args) => {
   const myGlobals = Object.assign({}, globals, _globals)
-  await _eval(code, myGlobals)(args)
+  return await _eval(code, myGlobals)(args)
 }
   
 
