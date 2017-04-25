@@ -52,7 +52,7 @@ export const _List = ({
     <ListGroupItem><strong>SecretId:</strong>&nbsp;{secretId}</ListGroupItem>
     <ListGroupItem><strong>UrlId:</strong>&nbsp;{urlId}</ListGroupItem>
     <ListGroupItem><strong>Name:</strong>&nbsp;{name}</ListGroupItem>
-    {invocations && <ListGroupItem><strong>Invocations:</strong>&nbsp;invocations}</ListGroupItem>}
+    {invocations && <ListGroupItem><strong>Invocations:</strong>&nbsp;{invocations}</ListGroupItem>}
     {HTTPType && <ListGroupItem><strong>HTTP Type:</strong>&nbsp;{HTTPType}</ListGroupItem>}
     {createdAt && <ListGroupItem><strong>CreatedAt:</strong>&nbsp;{createdAt}</ListGroupItem>}
     {updatedAt && <ListGroupItem><strong>UpdatedAt:</strong>&nbsp;{updatedAt}</ListGroupItem>}
