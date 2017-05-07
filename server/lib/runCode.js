@@ -9,7 +9,7 @@ const R = require('ramda')
 const plura = require('plura')
 const flaxa = require('flaxa')
 const laiva = require('laiva')
-const timeeditApi = require('timeeditApi')
+const timeeditApi = require('timeeditapi')
 const destructo = require('destructo')
 
 const globals = {
