@@ -5,6 +5,12 @@ const _eval = require('eval')
 const invocationHookHandler = require('../dal/invocationHookHandler')
 const codeStorageHandler = require('../dal/codeStorageHandler')
 const storageHandler = require('../dal/flyingStorageHandler')
+const R = require('ramda')
+const plura = require('plura')
+const flaxa = require('flaxa')
+const laiva = require('laiva')
+const timeeditApi = require('timeeditApi')
+const destructo = require('destructo')
 
 const globals = {
   console,
@@ -15,6 +21,12 @@ const globals = {
   
   // packages
   fetch,
+  R,
+  plura,
+  flaxa,
+  laiva,
+  timeeditApi,
+  destructo,
 
   // own
   storageHandler,

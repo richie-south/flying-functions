@@ -63,6 +63,18 @@ these globals are accessible from your flying function
 - setTimeout
 - fetch 
   - `isomorphic-fetch` from npm
+- R
+  - `ramda` from npm
+- plura
+  - `plura` from npm
+- flaxa
+  - `flaxa` from npm
+- laiva
+  - `laiva` from npm
+- timeeditApi
+  - `timeeditApi` from npm
+- destructo
+  - `destructo` from npm
 - storageHandler
   - Persistent storage handler
 - _requestOrigin 
